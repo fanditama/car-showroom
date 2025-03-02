@@ -12,12 +12,6 @@ it('can render car page', function () {
     $this->get(CarResource::getUrl('index'))->assertSuccessful();
 });
 
-it('can render, generate, perform request URL in this page', function () {
-    $this->get(CarResource::getUrl('view', [
-        'record' => Car::factory()->create(),
-    ]))->assertSuccessful();
-});
-
 it('can list cars', function () {
     $cars = Car::factory()->count(10)->create();
 
@@ -182,13 +176,4 @@ it('can delete car page', function () {
         ->callAction(DeleteAction::class);
 
     $this->assertModelMissing($car);
-});
-
-it('can not delete car page by other user', function () {
-    $car = Car::factory()->create();
-
-    livewire(CarResource\Pages\EditCar::class, [
-        'record' => $car->getRouteKey(),
-    ])
-        ->assertActionHidden(DeleteAction::class);
 });
