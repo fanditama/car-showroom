@@ -10,4 +10,14 @@ class Car extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     protected $fillable = ['brand', 'model', 'year', 'price', 'type', 'description', 'image_url'];
+
+    protected $casts = [
+        'brand' => 'string',
+        'model' => 'string',
+        'year' => 'integer',
+        'price' => 'integer',
+        'type' => 'string',
+        'description' => 'string',
+        'image_url' => 'string',
+    ];
 }

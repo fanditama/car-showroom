@@ -22,8 +22,8 @@ class CarFactory extends Factory
             'year' => $this->faker->year(),
             'price' => $this->faker->randomFloat(2, 10000, 100000),
             'type' => $this->faker->randomElement(['sedan', 'suv', 'MPV', 'hatchback', 'sport']),
-            'description' => $this->faker->paragraph(),
-            'image_url' => $this->faker->imageUrl(),
+            'description' => $this->faker->paragraph(1),
+            'image_url' => null,
         ];
     }
 }
