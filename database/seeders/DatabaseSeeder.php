@@ -6,6 +6,7 @@ use App\Models\Car;
 use App\Models\Favorite;
 use App\Models\Promotion;
 use App\Models\TestDrive;
+use App\Models\Transaction;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
         Promotion::factory(10)->create();
         TestDrive::factory(10)->create();
         Favorite::factory(10)->create();
+        Transaction::factory(10)->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',
