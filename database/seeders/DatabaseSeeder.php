@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Car;
+use App\Models\CreditApplication;
 use App\Models\Favorite;
 use App\Models\Promotion;
 use App\Models\TestDrive;
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         TestDrive::factory(10)->create();
         Favorite::factory(10)->create();
         Transaction::factory(10)->create();
+        CreditApplication::factory(10)->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',
