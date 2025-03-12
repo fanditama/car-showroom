@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
         Car::factory(10)->create();
         Promotion::factory(10)->create();
         TestDrive::factory(10)->create();
@@ -28,10 +28,5 @@ class DatabaseSeeder extends Seeder
         Transaction::factory(10)->create();
         CreditApplication::factory(10)->create();
         Contact::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

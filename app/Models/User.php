@@ -23,6 +23,8 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'address',
+        'phone_number',
     ];
 
     /**
@@ -43,8 +45,11 @@ class User extends Authenticatable implements FilamentUser
     protected function casts(): array
     {
         return [
+            'email' => 'string',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'address' => 'string',
+            'phone_number' => 'string',
         ];
     }
 
