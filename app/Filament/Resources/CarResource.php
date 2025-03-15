@@ -132,6 +132,7 @@ class CarResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('year')
                     ->label('Tahun Produksi')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price')
                     ->label('Harga Mobil')
@@ -143,6 +144,7 @@ class CarResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type')
                     ->label('Tipe Mobil')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Deskripsi Mobil')
@@ -157,7 +159,9 @@ class CarResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
