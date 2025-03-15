@@ -47,10 +47,10 @@ class CreditApplicationResource extends Resource
                     ->live(debounce: 500)
                     ->label('waktu Pengajuan')
                     ->placeholder('Masukan waktu pengajuan')
-                    ->format('d/m/Y H:i:s')
+                    ->format('d-m-Y H:i:s')
                     ->seconds(false)
                     ->timezone('Asia/Jakarta')
-                    ->displayFormat('d/m/Y H:i:s')
+                    ->displayFormat('d-m-Y H:i:s')
                     ->seconds(true)
                     ->validationMessages([
                         'format' => 'Form tanggal harus berbentuk format tanggal dan waktu.'

@@ -29,7 +29,7 @@ class Transaction extends Model
     public function setTransactionDateAttribute($value)
     {
         if ($value) {
-            $this->attributes['transaction_date'] = \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', $value)
+            $this->attributes['transaction_date'] = Carbon::createFromFormat('d-m-Y H:i:s', $value)
                 ->format('Y-m-d H:i:s');
         } else {
             $this->attributes['transaction_date'] = null;

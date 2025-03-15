@@ -45,8 +45,8 @@ class TestDriveResource extends Resource
                     ->label('Tanggal Test Mengemudi')
                     ->placeholder('Pilih tanggal test mengemudi')
                     ->required()
-                    ->format('d/m/Y')
-                    ->displayFormat('d/m/Y')
+                    ->format('d-m-Y')
+                    ->displayFormat('d-m-Y')
                     ->validationMessages([
                         'required' => 'Form tanggal test mengemudi tidak boleh kosong.',
                         'format' => 'Form tanggal harus berbentuk format tanggal.'
@@ -80,7 +80,7 @@ class TestDriveResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('testdrive_date')
                     ->label('Tanggal Test Mengemudi')
-                    ->date('d/m/Y')
+                    ->date('d-m-Y')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')

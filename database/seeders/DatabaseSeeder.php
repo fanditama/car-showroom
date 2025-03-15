@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Car;
 use App\Models\Contact;
 use App\Models\CreditApplication;
-use App\Models\Favorite;
 use App\Models\Promotion;
 use App\Models\TestDrive;
 use App\Models\Transaction;
@@ -24,7 +23,6 @@ class DatabaseSeeder extends Seeder
         Car::factory(10)->create();
         Promotion::factory(10)->create();
         TestDrive::factory(10)->create();
-        Favorite::factory(10)->create();
         Transaction::factory(10)->create();
         CreditApplication::factory(10)->create();
         Contact::factory(10)->create();

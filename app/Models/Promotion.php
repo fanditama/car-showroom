@@ -26,7 +26,7 @@ class Promotion extends Model
     public function setStartDateAttribute($value)
     {
         if ($value) {
-            $data = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+            $data = Carbon::createFromFormat('d-m-Y', $value)->format('Y-m-d');
             $this->attributes['start_date'] = $data;
         } else {
             $this->attributes['start_date'] = null;
@@ -36,7 +36,7 @@ class Promotion extends Model
     public function setEndDateAttribute($value)
     {
         if ($value) {
-            $data = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+            $data = Carbon::createFromFormat('d-m-Y', $value)->format('Y-m-d');
             $this->attributes['end_date'] = $data;
         } else {
             $this->attributes['end_date'] = null;

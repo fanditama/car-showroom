@@ -17,7 +17,7 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         return [
-            'transaction_date' => now()->format('d/m/Y H:i:s'),
+            'transaction_date' => now()->format('d-m-Y H:i:s'),
             'total_amount' => $this->faker->randomFloat(2, 10000, 100000),
             'payment_method' => $this->faker->randomElement(['transfer_bank', 'credit_card', 'cash']),
             'status' => $this->faker->randomElement(['pending', 'success', 'cancel']),

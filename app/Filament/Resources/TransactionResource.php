@@ -49,10 +49,10 @@ class TransactionResource extends Resource
                     ->live(debounce: 500)
                     ->label('waktu Transaksi')
                     ->placeholder('Masukan waktu transaksi')
-                    ->format('d/m/Y H:i:s')
+                    ->format('d-m-Y H:i:s')
                     ->seconds(false)
                     ->timezone('Asia/Jakarta')
-                    ->displayFormat('d/m/Y H:i:s')
+                    ->displayFormat('d-m-Y H:i:s')
                     ->seconds(true)
                     ->validationMessages([
                         'format' => 'Form tanggal harus berbentuk format tanggal dan waktu.'
@@ -113,7 +113,6 @@ class TransactionResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('transaction_date')
                     ->label('Waktu Transaksi')
-                    // ->formatStateUsing(fn ($state) => $state ? Carbon::parse($state)->format('d-m-Y | H:i:s') : '-')
                     ->dateTime('d-m-Y | H:i:s')
                     ->searchable()
                     ->sortable(),
@@ -133,7 +132,7 @@ class TransactionResource extends Resource
                     ->label('Status Transaksi')
                     ->searchable()
                     ->sortable(),
-                
+
             ])
             ->filters([
                 //

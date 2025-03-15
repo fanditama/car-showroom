@@ -20,8 +20,8 @@ class PromotionFactory extends Factory
             'title' => $this->faker->sentence(2),
             'description' => $this->faker->sentence(10),
             'discount' => $this->faker->randomFloat(2, 10000, 100000),
-            'start_date' => now()->format('d/m/Y'),
-            'end_date' => now()->addDays(7)->format('d/m/Y'),
+            'start_date' => now()->format('d-m-Y'),
+            'end_date' => now()->addDays(7)->format('d-m-Y'),
             'car_id' => \App\Models\Car::factory(),
         ];
     }

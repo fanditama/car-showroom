@@ -26,7 +26,7 @@ class CreditApplication extends Model
     public function setApplicationDateAttribute($value)
     {
         if ($value) {
-            $this->attributes['application_date'] = \Carbon\Carbon::createFromFormat('d/m/Y H:i:s', $value)
+            $this->attributes['application_date'] = \Carbon\Carbon::createFromFormat('d-m-Y H:i:s', $value)
                 ->format('Y-m-d H:i:s');
         } else {
             $this->attributes['application_date'] = null;

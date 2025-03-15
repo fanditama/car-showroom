@@ -21,7 +21,7 @@ class TestDrive extends Model
     public function setTestDriveDateAttribute($value)
     {
         if ($value) {
-            $data = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+            $data = Carbon::createFromFormat('d-m-Y', $value)->format('Y-m-d');
             $this->attributes['testdrive_date'] = $data;
         } else {
             $this->attributes['testdrive_date'] = null;

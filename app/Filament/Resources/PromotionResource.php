@@ -71,16 +71,16 @@ class PromotionResource extends Resource
                 DatePicker::make('start_date')
                     ->label('Tanggal Mulai Promosi')
                     ->placeholder('Pilih tanggal mulai promosi')
-                    ->format('d/m/Y')
-                    ->displayFormat('d/m/Y')
+                    ->format('d-m-Y')
+                    ->displayFormat('d-m-Y')
                     ->validationMessages([
                         'format' => 'Form tanggal harus berbentuk format tanggal.'
                     ]),
                 DatePicker::make('end_date')
                     ->label('Tanggal Berakhir Promosi')
                     ->placeholder('Pilih tanggal berakhir promosi')
-                    ->format('d/m/Y')
-                    ->displayFormat('d/m/Y')
+                    ->format('d-m-Y')
+                    ->displayFormat('d-m-Y')
                     ->validationMessages([
                         'format' => 'Form tanggal harus berbentuk format tanggal.'
                     ])
@@ -113,12 +113,12 @@ class PromotionResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('start_date')
                     ->label('Tanggal Mulai Promosi')
-                    ->date('d/m/Y')
+                    ->date('d-m-Y')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('end_date')
                     ->label('Tanggal Berakhir Promosi')
-                    ->date('d/m/Y')
+                    ->date('d-m-Y')
                     ->searchable()
                     ->sortable(),
             ])

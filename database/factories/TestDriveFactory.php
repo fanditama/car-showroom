@@ -17,7 +17,7 @@ class TestDriveFactory extends Factory
     public function definition(): array
     {
         return [
-            'testdrive_date' => now()->format('d/m/Y'),
+            'testdrive_date' => now()->format('d-m-Y'),
             'status' => $this->faker->randomElement(['tertunda', 'disetujui', 'ditolak']),
             'user_id' => \App\Models\User::factory(),
             'car_id' => \App\Models\Car::factory(),
