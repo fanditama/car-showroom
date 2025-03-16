@@ -14,6 +14,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\RawJs;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -156,7 +157,53 @@ class CarResource extends Resource
                     ->size(60)
             ])
             ->filters([
-                //
+                SelectFilter::make('type')
+                    ->options([
+                        'sedan' => 'Sedan',
+                        'suv' => 'SUV',
+                        'MPV' => 'MPV',
+                        'hatchback' => 'Hatchback',
+                        'sport' => 'Sport',
+                    ]),
+                Tables\Filters\Filter::make('price')
+                    ->form([
+                        Forms\Components\TextInput::make('min_price')
+                            ->label('Harga Terendah')
+                            ->placeholder('Masukan angka tanpa titik (.)')
+                            ->prefix('Rp ')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('max_price')
+                            ->label('Harga Tertinggi')
+                            ->placeholder('Masukan angka tanpa titik (.)')
+                            ->prefix('Rp ')
+                            ->numeric(),
+                    ])
+                    // cek apakah min_price dan max_price ada, jika ada, tambahkan query
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['min_price'],
+                                fn (Builder $query, $minPrice): Builder => $query->where('price', '>=', $minPrice),
+                            )
+                            ->when(
+                                $data['max_price'],
+                                fn (Builder $query, $maxPrice): Builder => $query->where('price', '<=', $maxPrice),
+                            );
+                    })
+                    // tampilkan indikator harga terendah dan harga tertinggi
+                    ->indicateUsing(function (array $data): ?string {
+                            $indicators = [];
+
+                            if (!empty($data['min_price'])) {
+                                $indicators[] = 'Harga Terendah: Rp ' . number_format($data['min_price'], 0, ',', '.');
+                            }
+
+                            if (!empty($data['max_price'])) {
+                                $indicators[] = 'Harga Tertinggi: Rp ' . number_format($data['max_price'], 0, ',', '.');
+                            }
+
+                            return !empty($indicators) ? implode(' - ', $indicators) : null;
+                    }),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

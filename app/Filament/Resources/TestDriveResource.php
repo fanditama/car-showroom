@@ -11,6 +11,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -89,7 +90,31 @@ class TestDriveResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options([
+                        'tertunda' => 'Tertunda',
+                        'disetujui' => 'Disetujui',
+                        'ditolak' => 'Ditolak',
+                    ]),
+            Tables\Filters\Filter::make('testdrive_date')
+                ->form([
+                    DatePicker::make('from_date')
+                        ->label('Dari Tanggal'),
+                    DatePicker::make('to_date')
+                        ->label('Sampai Tanggal'),
+                ])
+                // cek apakah from_date dan to_date ada, jika ada, tambahkan query
+                ->query(function (Builder $query, array $data): Builder {
+                    return $query
+                        ->when(
+                            $data['from_date'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('testdrive_date', '>=', $date),
+                        )
+                        ->when(
+                            $data['to_date'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('testdrive_date', '<=', $date),
+                        );
+                }),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

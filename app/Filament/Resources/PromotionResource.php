@@ -123,7 +123,66 @@ class PromotionResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('discount')
+                    ->form([
+                        Forms\Components\TextInput::make('min_discount')
+                            ->label('Penghasilan Terendah')
+                            ->placeholder('Masukan angka tanpa titik (.)')
+                            ->prefix('Rp ')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('max_discount')
+                            ->label('Penghasilan Tertinggi')
+                            ->placeholder('Masukan angka tanpa titik (.)')
+                            ->prefix('Rp ')
+                            ->numeric(),
+                    ])
+                    // cek apakah min_discount dan max_discount ada, jika ada, tambahkan query
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['min_discount'],
+                                fn (Builder $query, $minDiscount): Builder => $query->where('discount', '>=', $minDiscount),
+                            )
+                            ->when(
+                                $data['max_discount'],
+                                fn (Builder $query, $maxDiscount): Builder => $query->where('discount', '<=', $maxDiscount),
+                            );
+                    })
+                    // tampilkan indikator diskon terendah dan diskon tertinggi
+                    ->indicateUsing(function (array $data): ?string {
+                            $indicators = [];
+
+                            if (!empty($data['min_discount'])) {
+                                $indicators[] = 'Diskon Terendah: Rp ' . number_format($data['min_discount'], 0, ',', '.');
+                            }
+
+                            if (!empty($data['max_discount'])) {
+                                $indicators[] = 'Diskon Tertinggi: Rp ' . number_format($data['max_discount'], 0, ',', '.');
+                            }
+
+                            return !empty($indicators) ? implode(' - ', $indicators) : null;
+                    }),
+                    Tables\Filters\Filter::make('date_range')
+                        ->form([
+                            Forms\Components\DatePicker::make('start_date')
+                                ->label('Tanggal Mulai')
+                                ->placeholder('Pilih tanggal mulai'),
+                            Forms\Components\DatePicker::make('end_date')
+                                ->label('Tanggal Akhir')
+                                ->placeholder('Pilih tanggal akhir'),
+                        ])
+                        // cek apakah start_date dan end_date ada, jika ada, tambahkan query
+                        ->query(function (Builder $query, array $data): Builder {
+                            return $query
+                                ->when(
+                                    $data['start_date'],
+                                    fn (Builder $query, $startDate): Builder => $query->whereDate('start_date', '>=', $startDate),
+                                )
+                                ->when(
+                                    $data['end_date'],
+                                    fn (Builder $query, $endDate): Builder => $query->whereDate('end_date', '<=', $endDate),
+                                );
+                        }),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

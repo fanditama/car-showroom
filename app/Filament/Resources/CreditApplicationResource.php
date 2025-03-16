@@ -13,6 +13,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\RawJs;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -115,8 +116,52 @@ class CreditApplicationResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                //
-            ])
+                Tables\Filters\Filter::make('income')
+                    ->form([
+                        Forms\Components\TextInput::make('min_income')
+                            ->label('Penghasilan Terendah')
+                            ->placeholder('Masukan angka tanpa titik (.)')
+                            ->prefix('Rp ')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('max_income')
+                            ->label('Penghasilan Tertinggi')
+                            ->placeholder('Masukan angka tanpa titik (.)')
+                            ->prefix('Rp ')
+                            ->numeric(),
+                    ])
+                    // cek apakah min_income dan max_income ada, jika ada, tambahkan query
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['min_income'],
+                                fn (Builder $query, $minIncome): Builder => $query->where('income', '>=', $minIncome),
+                            )
+                            ->when(
+                                $data['max_income'],
+                                fn (Builder $query, $maxIncome): Builder => $query->where('income', '<=', $maxIncome),
+                            );
+                    })
+                    // tampilkan indikator pendapatan terendah dan pendapatan tertinggi
+                    ->indicateUsing(function (array $data): ?string {
+                            $indicators = [];
+
+                            if (!empty($data['min_income'])) {
+                                $indicators[] = 'Pendapatan Terendah: Rp ' . number_format($data['min_income'], 0, ',', '.');
+                            }
+
+                            if (!empty($data['max_income'])) {
+                                $indicators[] = 'Pendapatan Tertinggi: Rp ' . number_format($data['max_income'], 0, ',', '.');
+                            }
+
+                            return !empty($indicators) ? implode(' - ', $indicators) : null;
+                    }),
+                SelectFilter::make('status')
+                    ->options([
+                        'tertunda' => 'Tertunda',
+                        'disetujui' => 'Disetujui',
+                        'ditolak' => 'Ditolak',
+                    ]),
+                ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
