@@ -19,7 +19,7 @@ class CreditApplication extends Model
 
     protected $casts = [
         'application_date' => 'datetime',
-        'income' => 'integer',
+        'income' => 'decimal:2',
         'status' => 'string',
     ];
 

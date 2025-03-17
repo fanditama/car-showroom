@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('credit_applications', function (Blueprint $table) {
             $table->id();
             $table->dateTime('application_date')->nullable();
-            $table->decimal('income', 10, 2);
+            $table->decimal('income', 12, 2);
             $table->enum('status', ['tertunda', 'disetujui', 'ditolak'])->nullable();
             $table->unsignedBigInteger('user_id')->constrained();
             $table->unsignedBigInteger('car_id')->constrained();

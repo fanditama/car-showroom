@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateCreditApplication extends CreateRecord
 {
     protected static string $resource = CreditApplicationResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

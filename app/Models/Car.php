@@ -15,7 +15,7 @@ class Car extends Model
         'brand' => 'string',
         'model' => 'string',
         'year' => 'integer',
-        'price' => 'integer',
+        'price' => 'decimal:2',
         'type' => 'string',
         'description' => 'string',
         'image_url' => 'string',

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->dateTime('transaction_date')->nullable();
-            $table->decimal('total_amount', 10, 2);
+            $table->decimal('total_amount', 12, 2);
             $table->enum('payment_method', ['transfer_bank', 'credit_card', 'cash'])->default('transfer_bank')->nullable();
             $table->enum('status', ['pending', 'success', 'cancel'])->default('pending')->nullable();
             $table->unsignedBigInteger('user_id');

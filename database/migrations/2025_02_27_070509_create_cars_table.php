@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('brand');
             $table->string('model');
             $table->integer('year');
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 12, 2);
             $table->enum('type', ['sedan', 'suv', 'MPV', 'hatchback', 'sport'])->default('sedan');
             $table->string('description')->nullable();
             $table->string('image_url')->nullable();
