@@ -20,6 +20,8 @@ class TestDriveResource extends Resource
 {
     protected static ?string $model = TestDrive::class;
 
+    protected static ?string $pluralModelLabel = 'Tes Mobil';
+
     protected static ?string $navigationIcon = 'heroicon-o-beaker';
 
     public static function form(Form $form): Form

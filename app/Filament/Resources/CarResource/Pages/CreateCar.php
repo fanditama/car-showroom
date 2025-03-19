@@ -10,6 +10,8 @@ class CreateCar extends CreateRecord
 {
     protected static string $resource = CarResource::class;
 
+    protected static ?string $title = 'Buat Mobil';
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

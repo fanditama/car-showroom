@@ -10,10 +10,12 @@ class EditCreditApplication extends EditRecord
 {
     protected static string $resource = CreditApplicationResource::class;
 
+    protected static ?string $title = 'Ubah Pengajuan Kredit';
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()->label('Hapus Pengajuan Kredit'),
         ];
     }
 }

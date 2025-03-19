@@ -10,6 +10,8 @@ class CreateCreditApplication extends CreateRecord
 {
     protected static string $resource = CreditApplicationResource::class;
 
+    protected static ?string $title = 'Buat Pengajuan Kredit';
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

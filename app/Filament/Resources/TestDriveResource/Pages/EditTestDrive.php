@@ -10,10 +10,12 @@ class EditTestDrive extends EditRecord
 {
     protected static string $resource = TestDriveResource::class;
 
+    protected static ?string $title = 'Ubah Promosi';
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()->label('Hapus Tes Mobil'),
         ];
     }
 }

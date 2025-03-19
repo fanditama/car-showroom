@@ -10,6 +10,8 @@ class CreatePromotion extends CreateRecord
 {
     protected static string $resource = PromotionResource::class;
 
+    protected static ?string $title = 'Buat Promosi';
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

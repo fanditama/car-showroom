@@ -10,10 +10,12 @@ class EditPromotion extends EditRecord
 {
     protected static string $resource = PromotionResource::class;
 
+    protected static ?string $title = 'Ubah Promosi';
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()->label('Hapus Promosi'),
         ];
     }
 }

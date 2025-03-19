@@ -22,6 +22,8 @@ class CreditApplicationResource extends Resource
 {
     protected static ?string $model = CreditApplication::class;
 
+    protected static ?string $pluralModelLabel = 'Pengajuan Kredit';
+
     protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
 
     public static function form(Form $form): Form

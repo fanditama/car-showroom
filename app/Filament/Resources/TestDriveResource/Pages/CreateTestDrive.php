@@ -10,6 +10,8 @@ class CreateTestDrive extends CreateRecord
 {
     protected static string $resource = TestDriveResource::class;
 
+    protected static ?string $title = 'Buat Tes Mobil';
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
