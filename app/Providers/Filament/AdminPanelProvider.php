@@ -27,6 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Showroom Mobil')
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -53,6 +54,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->renderHook( 
+                'panels::auth.login.form.after',
+                fn () => view('auth.socialite.google') . view('auth.socialite.facebook')
+            );
     }
 }
