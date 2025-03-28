@@ -1,0 +1,70 @@
+<nav class="w-full lg:max-w-4xl max-w-[335px] bg-white dark:bg-gray-800 rounded-lg shadow-md mb-6">
+    <div class="container mx-auto px-4 py-3">
+        <div class="flex items-center justify-between">
+            <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-900 dark:text-white hover:underline">Showroom Mobil</a>
+            <div class="flex-1 flex justify-center">
+                <div class="flex space-x-4">
+                    @php
+                        $categories = \App\Models\Car::select('type')->distinct()->get()->pluck('type');
+                        $currentType = request()->query('type');
+                    @endphp
+                    
+                    @foreach ($categories as $category)
+                        <a href="{{ url('/?type=' . urlencode($category)) }}" class="{{ $currentType == $category ? 'font-bold text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }}">{{ $category }}</a>
+                    @endforeach
+                </div>
+            </div>
+            
+            <!-- Profile Dropdown -->
+            <div x-data="{ open: false }" class="relative">
+                <button @click="open = !open" class="flex items-center focus:outline-none">
+                    <div class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center">
+                        @auth
+                            <span class="text-sm font-bold text-gray-700 dark:text-gray-300">{{ substr(auth()->user()->name, 0, 1) }}</span>
+                        @else
+                            <svg class="h-5 w-5 text-gray-700 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        @endauth
+                    </div>
+                </button>
+                
+                <div x-show="open" 
+                     @click.away="open = false"
+                     x-transition:enter="transition ease-out duration-100"
+                     x-transition:enter-start="transform opacity-0 scale-95"
+                     x-transition:enter-end="transform opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-75"
+                     x-transition:leave-start="transform opacity-100 scale-100"
+                     x-transition:leave-end="transform opacity-0 scale-95"
+                     class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50">
+                    
+                    @auth
+                        <span class="block px-4 py-2 text-sm text-gray-500 dark:text-gray-400 border-b border-gray-100 dark:border-gray-700">
+                            {{ auth()->user()->name }}
+                        </span>
+                        <a href="{{ route('account.settings') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            Pengaturan Akun
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                Keluar
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            Masuk
+                        </a>
+                        <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            Daftar Akun
+                        </a>
+                    @endauth
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Make sure Alpine.js is loaded -->
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v3.0.0/dist/alpine.min.js" defer></script>
