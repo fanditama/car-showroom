@@ -8,6 +8,15 @@ use Livewire\Component;
 
 class Header extends Component
 {
+    public $categories;
+    public $currentType;
+
+    public function mount()
+    {
+        $this->categories = Car::select('type')->distinct()->pluck('type');
+        $this->currentType = request()->query('type');
+    }
+
     public function logout()
     {
         Auth::logout();
