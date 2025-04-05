@@ -2,6 +2,7 @@
 
 use App\Livewire\Home\Header;
 use App\Models\Car;
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
@@ -77,7 +78,7 @@ it('menampilan inisial user\'s ketika terautentikasi', function () {
 it('tidak menampilkan inisial user\'s ketika tidak terautentikasi', function () {
     Auth::logout();
     Livewire::test(Header::class)
-        
+
         ->assertDontSee('J');
 });
 
@@ -98,4 +99,81 @@ it('menampilkan icon keranjang belanja', function () {
 it('menampilkan angka nol pada keranjang belanja', function () {
     Livewire::test(Header::class)
         ->assertSeeHtml('<span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>');
+});
+
+it('ubah penghitungan cart ketika cart di updated', function () {
+    $user = User::factory()->create();
+    actingAs($user);
+
+    // buat beberapa cart item
+    Cart::factory()->count(3)->create([
+        'user_id' => $user->id
+    ]);
+
+    Livewire::test(Header::class)
+        ->assertSet('cartItemCount', 3)
+        ->call('updateCartCount', ['count' => 5])
+        ->assertSet('cartItemCount', 5);
+});
+
+it('reset penghitungan cart ke nol ketika user logout', function () {
+    $user = User::factory()->create();
+    actingAs($user);
+
+    // buat beberapa cart item
+    Cart::factory()->count(3)->create([
+        'user_id' => $user->id
+    ]);
+
+    Livewire::test(Header::class)
+        ->assertSet('cartItemCount', 3)
+        ->call('logout')
+        ->assertSet('cartItemCount', 0);
+});
+
+it('listens untuk function cartUpdated event', function () {
+    $user = User::factory()->create();
+    actingAs($user);
+
+    Livewire::test(Header::class)
+        ->assertSet('cartItemCount', 0)
+        ->dispatch('cartUpdated', ['count' => 7])
+        ->assertSet('cartItemCount', 7);
+});
+
+it('dapat me-load dengan benar perhitungan cart dari database di function mount', function () {
+    $user = User::factory()->create();
+    actingAs($user);
+
+    // Create some cart items
+    Cart::factory()->count(4)->create([
+        'user_id' => $user->id
+    ]);
+
+    Livewire::test(Header::class)
+        ->assertSet('cartItemCount', 4);
+});
+
+it('menampilkan perhitungan cart di halaman view mobile dan dekstop', function () {
+    $user = User::factory()->create();
+    actingAs($user);
+
+    Livewire::test(Header::class)
+        ->assertSet('cartItemCount', 0)
+        ->dispatch('cartUpdated', ['count' => 7])
+        ->assertSet('cartItemCount', 7);
+});
+
+it('link ke halaman cart dengan benar', function () {
+    Livewire::test(Header::class)
+        ->assertSeeHtml('href="' . route('cart.index') . '"');
+});
+
+it('menjaga perhitungan cart ke nol untuk user tamu', function () {
+    Auth::logout();
+
+    Livewire::test(Header::class)
+        ->assertSet('cartItemCount', 0)
+        ->call('updateCartCount', ['count' => 5])
+        ->assertSet('cartItemCount', 0);
 });

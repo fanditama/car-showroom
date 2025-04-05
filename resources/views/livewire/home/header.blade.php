@@ -7,11 +7,14 @@
 
                 <div class="flex items-center space-x-4">
                     <!-- Cart Icon -->
-                    <a href="#" class="relative flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                    <a href="{{ route('cart.index') }}" class="relative flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                        <span x-data="{ count: {{ $cartItemCount }} }" x-text="count"
+                            @cart-updated.window="count = $event.detail.count"
+                            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                        </span>
                     </a>
 
                     <!-- Profile Button -->
@@ -82,9 +85,9 @@
                  class="mt-4">
                 <div class="flex flex-col space-y-2">
                     @foreach ($categories as $category)
-                        <a href="{{ url('/?type=' . urlencode($category)) }}"
-                           class="{{ $currentType == $category ? 'font-bold text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }} py-2">
-                            {{ $category }}
+                        <a href="{{ url('/?type=' . urlencode(strtolower($category))) }}"
+                           class="{{ strtolower($currentType) == strtolower($category) ? 'font-bold text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }} py-2">
+                            {{ strtolower($category) }}
                         </a>
                     @endforeach
                 </div>
@@ -98,15 +101,10 @@
             <!-- Categories -->
             <div class="flex-1 flex justify-center">
                 <div class="flex space-x-4">
-                    @php
-                        $categories = \App\Models\Car::select('type')->distinct()->get()->pluck('type');
-                        $currentType = request()->query('type');
-                    @endphp
-
                     @foreach ($categories as $category)
-                        <a href="{{ url('/?type=' . urlencode($category)) }}"
-                           class="{{ $currentType == $category ? 'font-bold text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }}">
-                            {{ $category }}
+                        <a href="{{ url('/?type=' . urlencode(strtolower($category))) }}"
+                           class="{{ strtolower($currentType) == strtolower($category) ? 'font-bold text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }}">
+                            {{ strtolower($category) }}
                         </a>
                     @endforeach
                 </div>
@@ -115,11 +113,11 @@
             <!-- Desktop Right Section -->
             <div class="flex items-center space-x-4">
                 <!-- Cart Icon -->
-                <a href="#" class="relative flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                <a href="{{ route('cart.index') }}" class="relative flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
-                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">{{ $cartItemCount }}</span>
                 </a>
 
                 <!-- Desktop Profile -->
@@ -173,6 +171,3 @@
         </div>
     </div>
 </nav>
-
-<!-- Make sure Alpine.js is loaded -->
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v3.0.0/dist/alpine.min.js" defer></script>
