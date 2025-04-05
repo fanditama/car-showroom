@@ -27,5 +27,7 @@
 
         @fluxScripts
         @livewireScripts
+
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v3.0.0/dist/alpine.min.js" defer></script>
     </body>
 </html>

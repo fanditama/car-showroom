@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CarController;
+use App\Livewire\Car\CarDetail;
 use App\Livewire\Profile\Settings;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialiteController;
@@ -36,7 +36,11 @@ Route::get('/cars/{car}', function (Car $car) {
 })->name('cars.show');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/order/{car}', function(Car $car) {  // Add Car model type hint
+    Route::get('/cart', function() {
+       return view('order.cart-index-page');
+    })->name('cart.index');
+
+    Route::get('/order/{car}', function(Car $car) {
         return view('order.order-form-page', ['car' => $car]);
     })->name('order.form');
 

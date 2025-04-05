@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Car;
+use App\Models\Cart;
 use App\Models\Contact;
 use App\Models\CreditApplication;
 use App\Models\Promotion;
@@ -26,5 +27,6 @@ class DatabaseSeeder extends Seeder
         Transaction::factory(10)->create();
         CreditApplication::factory(10)->create();
         Contact::factory(10)->create();
+        Cart::factory(10)->create();
     }
 }
