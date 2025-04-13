@@ -7,4 +7,5 @@ enum StatusTransaction: string
     case pending = 'pending';
     case success = 'success';
     case cancel = 'cancel';
+    case cancel = 'failed';
 }

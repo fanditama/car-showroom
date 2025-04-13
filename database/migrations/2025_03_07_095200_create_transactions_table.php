@@ -16,7 +16,7 @@ return new class extends Migration
             $table->dateTime('transaction_date')->nullable();
             $table->decimal('total_amount', 12, 2);
             $table->enum('payment_method', ['transfer_bank', 'credit_card', 'cash'])->default('transfer_bank')->nullable();
-            $table->enum('status', ['pending', 'success', 'cancel'])->default('pending')->nullable();
+            $table->enum('status', ['pending', 'success', 'cancel', 'failed'])->default('pending')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('car_id');
             $table->timestamps();
