@@ -1,66 +1,129 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Showroom Mobil
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web modern untuk showroom mobil yang dibangun dengan Laravel dan Livewire. Aplikasi ini memungkinkan pengguna untuk menjelajahi, memfilter, dan membeli mobil secara online dengan integrasi peta lokasi dan pembayaran online.
 
-## About Laravel
+## Fitur
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Penjelajahan Mobil**: Lihat semua mobil yang tersedia dengan informasi detail
+- **Pemfilteran**: Filter mobil berdasarkan jenis dan urutkan berdasarkan harga (terendah/tertinggi)
+- **Autentikasi Pengguna**: Daftar, masuk, dan kelola akun Anda (termasuk login dengan media sosial)
+- **Keranjang Belanja**: Tambahkan mobil ke keranjang dan kelola pilihan Anda
+- **Lokasi Pengiriman**: Pilih lokasi pengiriman dengan peta interaktif
+- **Pembayaran Online**: Proses pembayaran dengan gateway pembayaran Midtrans
+- **Desain Responsif**: Berfungsi dengan baik di perangkat desktop maupun mobile
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Teknologi yang Digunakan
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Laravel**: Framework backend
+- **Livewire**: Untuk komponen dinamis dan reaktif tanpa menulis JavaScript
+- **Tailwind CSS**: Untuk styling
+- **Laravel Socialite**: Untuk autentikasi media sosial
+- **OpenStreetMap & Leaflet.js**: Untuk integrasi peta dan pemilihan lokasi
+- **Midtrans**: Untuk integrasi pembayaran online
 
-## Learning Laravel
+## Memulai
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Prasyarat
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- PHP 8.0 atau lebih tinggi
+- Composer
+- Node.js dan NPM
+- MySQL atau database lain yang didukung oleh Laravel
+- Akun Midtrans untuk integrasi pembayaran
+- Akun developer untuk OAuth (jika menggunakan login sosial)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Instalasi
 
-## Laravel Sponsors
+1. Clone repositori:
+   ```bash
+   git clone https://github.com/username-anda/car-showroom.git
+2. Masuk ke direktori proyek:
+   ```bash
+   cd car-showroom
+3. Instal dependensi PHP:
+   ```bash
+   composer install
+4. Instal dependensi JavaScript:
+   ```bash
+   npm install
+5. Buat salinan file .env.example:
+   ```bash
+   cp .env.example .env
+6. Generate kunci aplikasi:
+   ```bash
+   php artisan key:generate
+7. Konfigurasi database Anda di file .env.
+8. Jalankan migrasi:
+   ```bash
+   php artisan migrate
+9. Isi database dengan data awal:
+   ```bash
+   php artisan db:seed
+10. Build aset:
+    ```bash
+    npm run dev
+11. Mulai server pengembangan:
+    ```bash
+    php artisan serve
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Konfigurasi Integrasi
+### Integrasi Socialite (Login Media Sosial)
+1. Daftar aplikasi di platform yang ingin Anda integrasikasikan (Google, Facebook)
+2. Tambahkan kredensial di file .env:
+    GOOGLE_CLIENT_ID=your-client-id
+    GOOGLE_CLIENT_SECRET=your-client-secret
+    GOOGLE_REDIRECT_URI=http://localhost:8000/auth/google/callback
+    FACEBOOK_CLIENT_ID=your-client-id
+    FACEBOOK_CLIENT_SECRET=your-client-secret
+    FACEBOOK_REDIRECT_URI=http://localhost:8000/auth/facebook/callback
+3. Konfigurasi provider di config/services.php
 
-### Premium Partners
+### Integrasi OpenStreetMap
+OpenStreetMap digunakan untuk memilih lokasi pengiriman. Integrasi ini menggunakan Leaflet.js dan tidak memerlukan API key.
+1. Pastikan file JavaScript Leaflet.js dimuat di halaman:
+   ```
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+2. Inisialisasi peta di halaman formulir pemesanan:
+   ```
+   var map = L.map('map').setView([-6.200000, 106.816666], 13);
+   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+   }).addTo(map);
+   ```
 
-## Contributing
+Integrasi Midtrans
+1. Daftar akun di Midtrans
+2. Dapatkan kunci API (Client Key dan Server Key)
+3. Tambahkan kredensial di file .env:
+   MIDTRANS_SERVER_KEY=your-server-key
+   MIDTRANS_CLIENT_KEY=your-client-key
+   MIDTRANS_IS_PRODUCTION=false
+   MIDTRANS_MERCHANT_ID=your-merchant-id
+4. Tambahkan Snap.js di halaman checkout:
+   ```
+   <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
+   ```
+5. Implementasikan callback untuk menangani respons      pembayaran
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Pengujian
+Aplikasi ini mencakup pengujian komprehensif untuk komponen Livewire-nya. Jalankan pengujian dengan:
 
-## Code of Conduct
+php artisan test
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Rangkaian pengujian utama meliputi:
+- Pengujian komponen Home/Content
+- Pengujian komponen Home/Header
+- Pengujian fungsionalitas keranjang
+- Pengujian autentikasi pengguna
+- Pengujian integrasi peta
+- Pengujian pembayaran
+### Struktur Proyek
+Proyek ini mengikuti struktur standar Laravel dengan organisasi tambahan untuk komponen Livewire:
+- app/Livewire/Home/ - Berisi komponen Livewire untuk halaman beranda
+- app/Livewire/Order/ - Berisi komponen untuk pemesanan dan pembayaran
+- app/Models/ - Berisi model seperti Car, Cart, dan User
+- app/Services/ - Berisi layanan integrasi seperti MidtransService
+- tests/Feature/Livewire/ - Berisi pengujian untuk komponen Livewire
