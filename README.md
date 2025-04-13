@@ -70,12 +70,12 @@ Aplikasi web modern untuk showroom mobil yang dibangun dengan Laravel dan Livewi
 ### Integrasi Socialite (Login Media Sosial)
 1. Daftar aplikasi di platform yang ingin Anda integrasikasikan (Google, Facebook)
 2. Tambahkan kredensial di file .env:
-    GOOGLE_CLIENT_ID=your-client-id
-    GOOGLE_CLIENT_SECRET=your-client-secret
-    GOOGLE_REDIRECT_URI=http://localhost:8000/auth/google/callback
-    FACEBOOK_CLIENT_ID=your-client-id
-    FACEBOOK_CLIENT_SECRET=your-client-secret
-    FACEBOOK_REDIRECT_URI=http://localhost:8000/auth/facebook/callback
+    - GOOGLE_CLIENT_ID=your-client-id
+    - GOOGLE_CLIENT_SECRET=your-client-secret
+    - GOOGLE_REDIRECT_URI=http://localhost:8000/auth/google/callback
+    - FACEBOOK_CLIENT_ID=your-client-id
+    - FACEBOOK_CLIENT_SECRET=your-client-secret
+    - FACEBOOK_REDIRECT_URI=http://localhost:8000/auth/facebook/callback
 3. Konfigurasi provider di config/services.php
 
 ### Integrasi OpenStreetMap
