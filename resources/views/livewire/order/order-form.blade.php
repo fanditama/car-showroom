@@ -119,41 +119,6 @@
                             </select>
                             @error('payment_method') <span class="text-red-500">{{ $message }}</span> @enderror
                         </div>
-
-                        <div class="mb-4 mt-4 transition-all duration-300 ease-in-out {{ $showBankOptions ? 'opacity-100 max-h-96' : 'opacity-0 max-h-0 overflow-hidden' }}">
-                            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Pilih Bank</label>
-                                <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                                    @foreach($available_banks as $bank_code => $bank_name)
-                                    <div>
-                                        <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer hover:bg-gray-50 {{ $selected_bank === $bank_code ? 'ring-2 ring-blue-500 border-blue-500' : 'border-gray-200' }}">
-                                            <input type="radio" wire:model.live="selected_bank" value="{{ $bank_code }}" class="sr-only">
-                                            <span class="text-sm font-medium text-gray-900">{{ $bank_name }}</span>
-                                        </label>
-                                    </div>
-                                    @endforeach
-                                </div>
-                                @error('selected_bank') <span class="text-red-500 block mt-2">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-
-                        <!-- Opsi kartu kredit -->
-                        <div class="mb-4 mt-4 transition-all duration-300 ease-in-out {{ $showCardOptions ? 'opacity-100 max-h-96' : 'opacity-0 max-h-0 overflow-hidden' }}">
-                            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Pilih Jenis Kartu Kredit</label>
-                                <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                                    @foreach($available_cards as $card_code => $card_name)
-                                    <div>
-                                        <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer hover:bg-gray-50 {{ $selected_card_type === $card_code ? 'ring-2 ring-blue-500 border-blue-500' : 'border-gray-200' }}">
-                                            <input type="radio" wire:model.live="selected_card_type" value="{{ $card_code }}" class="sr-only">
-                                            <span class="text-sm font-medium text-gray-900">{{ $card_name }}</span>
-                                        </label>
-                                    </div>
-                                    @endforeach
-                                </div>
-                                @error('selected_card_type') <span class="text-red-500 block mt-2">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Footer Actions -->
@@ -505,47 +470,6 @@
                 setTimeout(() => {
                     window.location.href = '/transactions/' + transactionId;
                 }, 500);
-            });
-
-            // Listen untuk midtransPayment event
-            Livewire.on('midtransPayment', (data) => {
-                console.log('Midtrans payment initiated:', data);
-                
-                const token = data.token;
-                const redirectUrl = data.redirectUrl;
-                const paymentMethod = data.paymentMethod;
-                const transactionId = data.transactionId;
-                
-                if (typeof snap !== 'undefined') {
-                    // Gunakan snap.js untuk popup pembayaran
-                    snap.pay(token, {
-                        onSuccess: function(result) {
-                            console.log('Payment success:', result);
-                            window.location.href = '/transactions/' + transactionId;
-                        },
-                        onPending: function(result) {
-                            console.log('Payment pending:', result);
-                            window.location.href = '/transactions/' + transactionId;
-                        },
-                        onError: function(result) {
-                            console.log('Payment error:', result);
-                            alert('Pembayaran gagal: ' + (result.status_message || 'Terjadi kesalahan'));
-                        },
-                        onClose: function() {
-                            console.log('Customer closed the payment window');
-                            if (confirm('Apakah Anda ingin melihat status transaksi?')) {
-                                window.location.href = '/transactions';
-                            }
-                        }
-                    });
-                } else if (redirectUrl) {
-                    // Fallback ke redirect jika Snap.js tidak di-loaded
-                    window.location.href = redirectUrl;
-                } else {
-                    // Error handling
-                    console.error('No payment method available');
-                    alert('Terjadi kesalahan saat memproses pembayaran. Silakan coba lagi.');
-                }
             });
         });
     </script>

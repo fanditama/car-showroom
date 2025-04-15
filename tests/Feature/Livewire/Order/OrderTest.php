@@ -70,13 +70,13 @@ test('form validasi berfungsi', function () {
 test('toggles metode pembayaran mengubah opsi dengan benar', function () {
     Livewire::test(OrderForm::class, ['car' => $this->car])
         ->set('payment_method', 'transfer_bank')
-        ->assertSet('showBankOptions', true)
-        ->assertSet('showCardOptions', false);
+        ->assertSet('selected_bank', null)
+        ->assertSet('selected_card_type', null);
 
     Livewire::test(OrderForm::class, ['car' => $this->car])
         ->set('payment_method', 'credit_card')
-        ->assertSet('showBankOptions', false)
-        ->assertSet('showCardOptions', true);
+        ->assertSet('selected_bank', null)
+        ->assertSet('selected_card_type', null);
 
     Livewire::test(OrderForm::class, ['car' => $this->car])
         ->set('payment_method', 'cash')
@@ -84,30 +84,6 @@ test('toggles metode pembayaran mengubah opsi dengan benar', function () {
         ->assertSet('showCardOptions', false)
         ->assertSet('selected_bank', null)
         ->assertSet('selected_card_type', null);
-});
-
-test('transfer bank memerlukan pemilihan bank', function () {
-    Livewire::test(OrderForm::class, ['car' => $this->car])
-        ->set('name', 'John Doe')
-        ->set('phone', '081234567890')
-        ->set('address', 'A valid address that is long enough')
-        ->set('latitude', -6.2)
-        ->set('longitude', 106.8)
-        ->set('payment_method', 'transfer_bank')
-        ->call('submitOrder')
-        ->assertHasErrors(['selected_bank']);
-});
-
-test('kartu kredit memerlukan pemilihan tipe kartu', function () {
-    Livewire::test(OrderForm::class, ['car' => $this->car])
-        ->set('name', 'John Doe')
-        ->set('phone', '081234567890')
-        ->set('address', 'A valid address that is long enough')
-        ->set('latitude', -6.2)
-        ->set('longitude', 106.8)
-        ->set('payment_method', 'credit_card')
-        ->call('submitOrder')
-        ->assertHasErrors(['selected_card_type']);
 });
 
 test('pembayaran cash(tunai) membuat transaksi dan me-redirect', function () {
@@ -134,15 +110,7 @@ test('pembayaran cash(tunai) membuat transaksi dan me-redirect', function () {
     ]);
 });
 
-test('pembayaran midtrans membuat transaksi dan me-return payment token', function () {
-    // Mocking respon HTTP untuk Midtrans API
-    Http::fake([
-        'https://app.sandbox.midtrans.com/snap/v1/transactions' => Http::response([
-            'token' => 'fake-midtrans-token',
-            'redirect_url' => 'https://app.sandbox.midtrans.com/snap/v2/vtweb/fake-midtrans-token'
-        ], 200)
-    ]);
-
+test('pembayaran transfer bank membuat transaksi dan me-redirect', function () {
     Livewire::test(OrderForm::class, ['car' => $this->car])
         ->set('name', 'John Doe')
         ->set('phone', '081234567890')
@@ -150,32 +118,23 @@ test('pembayaran midtrans membuat transaksi dan me-return payment token', functi
         ->set('latitude', -6.2)
         ->set('longitude', 106.8)
         ->set('payment_method', 'transfer_bank')
-        ->set('selected_bank', 'bank_transfer_bca')
         ->call('submitOrder')
-        ->assertDispatched('midtransPayment');
+        ->assertDispatched('orderCreated');
 
-    // Cek jika transaksi telah dibuat dengan payment token
+    // cek jika transaksi telah dibuat
     assertDatabaseHas('transactions', [
         'user_id' => $this->user->id,
         'car_id' => $this->car->id,
         'total_amount' => 350000000,
         'payment_method' => 'transfer_bank',
-        'selected_bank' => 'bank_transfer_bca',
         'status' => 'pending',
-        'payment_token' => 'fake-midtrans-token',
-        'payment_url' => 'https://app.sandbox.midtrans.com/snap/v2/vtweb/fake-midtrans-token'
+        'latitude' => -6.2,
+        'longitude' => 106.8,
+        'order_address' => 'A valid address that is long enough'
     ]);
 });
 
-test('pembayaran kartu kredit membuat transaksi dengan tipe kartu yang didukung oleh pihak Midtrans', function () {
-    // Mocking respon HTTP untuk Midtrans API
-    Http::fake([
-        'https://app.sandbox.midtrans.com/snap/v1/transactions' => Http::response([
-            'token' => 'fake-midtrans-token',
-            'redirect_url' => 'https://app.sandbox.midtrans.com/snap/v2/vtweb/fake-midtrans-token'
-        ], 200)
-    ]);
-
+test('pembayaran credit card membuat transaksi dan me-redirect', function () {
     Livewire::test(OrderForm::class, ['car' => $this->car])
         ->set('name', 'John Doe')
         ->set('phone', '081234567890')
@@ -183,19 +142,43 @@ test('pembayaran kartu kredit membuat transaksi dengan tipe kartu yang didukung 
         ->set('latitude', -6.2)
         ->set('longitude', 106.8)
         ->set('payment_method', 'credit_card')
-        ->set('selected_card_type', 'visa')
         ->call('submitOrder')
-        ->assertDispatched('midtransPayment');
+        ->assertDispatched('orderCreated');
 
-    // Cek jika transaksi telah dibuat dengan payment token
+    // cek jika transaksi telah dibuat
     assertDatabaseHas('transactions', [
         'user_id' => $this->user->id,
         'car_id' => $this->car->id,
         'total_amount' => 350000000,
         'payment_method' => 'credit_card',
         'status' => 'pending',
-        'payment_token' => 'fake-midtrans-token',
-        'payment_url' => 'https://app.sandbox.midtrans.com/snap/v2/vtweb/fake-midtrans-token'
+        'latitude' => -6.2,
+        'longitude' => 106.8,
+        'order_address' => 'A valid address that is long enough'
+    ]);
+});
+
+test('pembayaran kartu kredit membuat transaksi dan me-redirect', function () {
+    Livewire::test(OrderForm::class, ['car' => $this->car])
+        ->set('name', 'John Doe')
+        ->set('phone', '081234567890')
+        ->set('address', 'A valid address that is long enough')
+        ->set('latitude', -6.2)
+        ->set('longitude', 106.8)
+        ->set('payment_method', 'credit_card')
+        ->call('submitOrder')
+        ->assertDispatched('orderCreated');
+
+    // cek jika transaksi telah dibuat
+    assertDatabaseHas('transactions', [
+        'user_id' => $this->user->id,
+        'car_id' => $this->car->id,
+        'total_amount' => 350000000,
+        'payment_method' => 'credit_card',
+        'status' => 'pending',
+        'latitude' => -6.2,
+        'longitude' => 106.8,
+        'order_address' => 'A valid address that is long enough'
     ]);
 });
 
@@ -206,32 +189,6 @@ test('update lokasi bekerja dengan benar', function () {
         ->assertSet('longitude', 106.82)
         ->assertSet('address', 'Jalan Sudirman 123, Jakarta')
         ->assertDispatched('locationUpdated');
-});
-
-test('midtrans error ditangani dengan baik', function () {
-    // Mocking respon HTTP untuk Midtrans API
-    Http::fake([
-        'https://app.sandbox.midtrans.com/snap/v1/transactions' => Http::response([
-            'error_messages' => ['Transaction failed']
-        ], 400)
-    ]);
-
-    Livewire::test(OrderForm::class, ['car' => $this->car])
-        ->set('name', 'John Doe')
-        ->set('phone', '081234567890')
-        ->set('address', 'A valid address that is long enough')
-        ->set('latitude', -6.2)
-        ->set('longitude', 106.8)
-        ->set('payment_method', 'transfer_bank')
-        ->set('selected_bank', 'bank_transfer_bca')
-        ->call('submitOrder');
-
-    // Cek jika transaksi telah dibuat dengan payment token
-    assertDatabaseHas('transactions', [
-        'user_id' => $this->user->id,
-        'car_id' => $this->car->id,
-        'status' => 'failed'
-    ]);
 });
 
 test('update bagian alamat dengan memanggil updateAddress method', function () {
@@ -254,67 +211,4 @@ test('menyimpan data lokasi saat metode pembayaran berubah', function () {
         ->assertSet('latitude', $initialLatitude)
         ->assertSet('longitude', $initialLongitude)
         ->assertDispatched('preserveMap');
-});
-
-test('inisialisasi komponen dengan benar dapat menyediakan bank dan kartu kredit', function() {
-    $expectedBanks = [
-        'bank_transfer_bca' => 'BCA',
-        'bank_transfer_bni' => 'BNI',
-        'bank_transfer_bri' => 'BRI',
-        'bank_transfer_mandiri' => 'Mandiri',
-        'bank_transfer_permata' => 'Permata'
-    ];
-
-    $expectedCards = [
-        'visa' => 'Visa',
-        'mastercard' => 'Mastercard',
-        'jcb' => 'JCB',
-        'amex' => 'American Express'
-    ];
-
-    Livewire::test(OrderForm::class, ['car' => $this->car])
-        ->assertSet('available_banks', $expectedBanks)
-        ->assertSet('available_cards', $expectedCards);
-});
-
-test('handlePaymentCallback meng-update status transaksi dengan benar', function() {
-    // buat sebuah transaksi terlebih dahulu
-    $transaction = Transaction::create([
-        'user_id' => $this->user->id,
-        'car_id' => $this->car->id,
-        'transaction_date' => now()->format('d-m-Y H:i:s'),
-        'total_amount' => $this->car->price,
-        'payment_method' => 'transfer_bank',
-        'status' => 'pending',
-        'latitude' => -6.2,
-        'longitude' => 106.8,
-        'order_address' => 'Test Address',
-        'order_id' => 'ORDER-' . time() . '-' . $this->user->id,
-    ]);
-
-    // test callback berhasil
-    Livewire::test(OrderForm::class, ['car' => $this->car])
-        ->call('handlePaymentCallback', [
-            'order_id' => $transaction->order_id,
-            'status_code' => 200
-        ]);
-
-    assertDatabaseHas('transactions', [
-        'id' => $transaction->id,
-        'status' => 'success'
-    ]);
-
-    // test callback gagal
-    $transaction->update(['status' => 'pending']);
-
-    Livewire::test(OrderForm::class, ['car' => $this->car])
-        ->call('handlePaymentCallback', [
-            'order_id' => $transaction->order_id,
-            'status_code' => 400
-        ]);
-
-    assertDatabaseHas('transactions', [
-        'id' => $transaction->id,
-        'status' => 'failed'
-    ]);
 });
