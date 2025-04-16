@@ -44,7 +44,11 @@ Route::middleware(['auth'])->group(function () {
         return view('order.order-form-page', ['car' => $car]);
     })->name('order.form');
 
-    Route::get('/transaction/{transaction}', function(Transaction $transaction) {
-        return view('transaction.transaction-detail-page', ['transaction' => $transaction]);
-    })->name('transaction.show');
+    Route::get('/transaction-cart', function() {
+        return view('transaction.transaction-cart-page');
+    })->name('transaction.cart');
+
+    Route::get('/transactions/{transaction}', function(App\Models\Transaction $transaction) {
+        return view('transaction.transaction-detail-page', compact('transaction'));
+    })->name('transactions.show');
 });
