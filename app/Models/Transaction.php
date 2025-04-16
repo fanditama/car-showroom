@@ -12,11 +12,22 @@ class Transaction extends Model
 
     protected $fillable = [
         'transaction_date',
+        'payment_date',
+        'payment_details',
         'total_amount',
         'payment_method',
         'status',
         'user_id',
         'car_id',
+        'status',
+        'latitude',
+        'longitude',
+        'snap_token',
+        'order_address',
+        'selected_bank',
+        'payment_token',
+        'payment_url',
+        'order_id',
     ];
 
     protected $casts = [
@@ -33,6 +44,16 @@ class Transaction extends Model
                 ->format('Y-m-d H:i:s');
         } else {
             $this->attributes['transaction_date'] = null;
+        }
+    }
+
+    public function setPaymentDateAttribute($value)
+    {
+        if ($value) {
+            $this->attributes['payment_date'] = Carbon::createFromFormat('d-m-Y H:i:s', $value)
+                ->format('Y-m-d H:i:s');
+        } else {
+            $this->attributes['payment_date'] = null;
         }
     }
 

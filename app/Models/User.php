@@ -60,6 +60,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(Cart::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
     public function canAccessPanel(Panel $panel): bool
 	{
 		if ($panel->getId() === 'admin') {
