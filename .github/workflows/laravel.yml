@@ -65,8 +65,17 @@ jobs:
     - name: Configure Database
       run: |
         php artisan config:clear
-        php artisan cache:clear
-        php artisan migrate --force
+        php artisan migrate:fresh --force --seed
+      env:
+        DB_CONNECTION: mysql
+        DB_HOST: 127.0.0.1
+        DB_PORT: 3306
+        DB_DATABASE: car_showroom_test
+        DB_USERNAME: root
+        DB_PASSWORD: password
+
+    - name: Clear Cache
+      run: php artisan cache:clear
       env:
         DB_CONNECTION: mysql
         DB_HOST: 127.0.0.1
