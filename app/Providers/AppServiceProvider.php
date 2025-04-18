@@ -13,10 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(
-            RegistrationResponse::class,
-            \App\Http\Responses\RegisterResponse::class
-        );
+
     }
 
     /**
@@ -24,10 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-            $switch
-                ->displayLocale('id') // atur local bahasa default
-                ->locales(['id', 'en']); // atur bahasa yang digunakan
-        });
+        
     }
 }
