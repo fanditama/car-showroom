@@ -1,5 +1,7 @@
 # Showroom Mobil
 
+[![Laravel CI](https://github.com/fanditama/mobile-showroom/actions/workflows/laravel.yml/badge.svg)](https://github.com/fanditama/mobile-showroom/actions/workflows/laravel.yml)
+
 Aplikasi web modern untuk showroom mobil yang dibangun dengan Laravel dan Livewire. Aplikasi ini memungkinkan pengguna untuk menjelajahi, memfilter, dan membeli mobil secara online dengan integrasi peta lokasi dan pembayaran online.
 
 ## Fitur
