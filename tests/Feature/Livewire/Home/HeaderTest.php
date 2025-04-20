@@ -67,6 +67,54 @@ it('menampilkan link nama user, pengaturan akun, dan logout ketika terautentikas
         ->assertDontSee(route('register'));
 });
 
+it('menampilkan tautan dashboard admin untuk pengguna admin', function () {
+    $admin = User::factory()->create([
+        'name' => 'Admin User',
+        'role' => 'admin'
+    ]);
+    actingAs($admin);
+
+    Livewire::test(Header::class)
+        ->assertSee('Dashboard Admin')
+        ->assertSee(route('dashboard.home'));
+});
+
+it('tidak menampilkan tautan dashboard admin untuk pengguna non-admin', function () {
+    $user = User::factory()->create([
+        'name' => 'Regular User',
+        'role' => 'user'
+    ]);
+    actingAs($user);
+
+    Livewire::test(Header::class)
+        ->assertDontSee('Dashboard Admin')
+        ->assertDontSee(route('dashboard.home'));
+});
+
+it('menampilkan tautan riwayat pemesanan untuk pengguna reguler tetapi tidak untuk admin', function () {
+    // Test reguler user
+    $user = User::factory()->create([
+        'name' => 'Regular User',
+        'role' => 'user'
+    ]);
+    actingAs($user);
+
+    Livewire::test(Header::class)
+        ->assertSee('Riwayat Pemesanan')
+        ->assertSee(route('transaction.cart'));
+
+    // Test admin user
+    $admin = User::factory()->create([
+        'name' => 'Admin User',
+        'role' => 'admin'
+    ]);
+    actingAs($admin);
+
+    Livewire::test(Header::class)
+        ->assertDontSee('Riwayat Pemesanan')
+        ->assertDontSee(route('transaction.cart'));
+});
+
 it('menampilan inisial user\'s ketika terautentikasi', function () {
     $user = User::factory()->create(['name' => 'John Doe']);
     actingAs($user);
@@ -78,8 +126,8 @@ it('menampilan inisial user\'s ketika terautentikasi', function () {
 it('tidak menampilkan inisial user\'s ketika tidak terautentikasi', function () {
     Auth::logout();
     Livewire::test(Header::class)
-
-        ->assertDontSee('J');
+        ->assertSeeHtml('<svg class="h-5 w-5 text-gray-700 dark:text-gray-300"') // cek SVG
+        ->assertDontSeeHtml('<span class="text-sm font-bold text-gray-700 dark:text-gray-300">J</span>'); // cek inisial user
 });
 
 it('link logout redirect ke route yang benar', function () {
@@ -176,4 +224,15 @@ it('menjaga perhitungan cart ke nol untuk user tamu', function () {
         ->assertSet('cartItemCount', 0)
         ->call('updateCartCount', ['count' => 5])
         ->assertSet('cartItemCount', 0);
+});
+
+it('tidak menampilkan ikon keranjang untuk pengguna admin', function () {
+    $admin = User::factory()->create([
+        'name' => 'Admin User',
+        'role' => 'admin'
+    ]);
+    actingAs($admin);
+
+    Livewire::test(Header::class)
+        ->assertDontSee(route('cart.index'));
 });

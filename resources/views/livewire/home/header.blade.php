@@ -7,15 +7,17 @@
 
                 <div class="flex items-center space-x-4">
                     <!-- Cart Icon -->
-                    <a href="{{ route('cart.index') }}" class="relative flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        <span x-data="{ count: {{ $cartItemCount }} }" x-text="count"
-                            @cart-updated.window="count = $event.detail.count"
-                            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                        </span>
-                    </a>
+                    @if(!auth()->check() || auth()->user()->role !== 'admin')
+                        <a href="{{ route('cart.index') }}" class="relative flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            <span x-data="{ count: {{ $cartItemCount }} }" x-text="count"
+                                @cart-updated.window="count = $event.detail.count"
+                                class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                            </span>
+                        </a>
+                    @endif
 
                     <!-- Profile Button -->
                     <div x-data="{ open: false }" class="relative">
@@ -48,9 +50,15 @@
                                 <a href="{{ route('account.settings') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
                                     Pengaturan Akun
                                 </a>
-                                <a href="{{ route('transaction.cart') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    Riwayat Pemesanan
-                                </a>
+                                @if(auth()->user()->role === 'admin')
+                                    <a href="{{ route('dashboard.home') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        Dashboard Admin
+                                    </a>
+                                @elseif(auth()->user()->role !== 'admin')
+                                    <a href="{{ route('transaction.cart') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        Riwayat Pemesanan
+                                    </a>
+                                @endif
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -116,12 +124,14 @@
             <!-- Desktop Right Section -->
             <div class="flex items-center space-x-4">
                 <!-- Cart Icon -->
-                <a href="{{ route('cart.index') }}" class="relative flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">{{ $cartItemCount }}</span>
-                </a>
+                @if(!auth()->check() || auth()->user()->role !== 'admin')
+                    <a href="{{ route('cart.index') }}" class="relative flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">{{ $cartItemCount }}</span>
+                    </a>
+                @endif
 
                 <!-- Desktop Profile -->
                 <div x-data="{ open: false }" class="relative">
@@ -154,9 +164,15 @@
                             <a href="{{ route('account.settings') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 Pengaturan Akun
                             </a>
-                            <a href="{{ route('transaction.cart') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                Riwayat Pemesanan
-                            </a>
+                            @if(auth()->user()->role === 'admin')
+                                <a href="{{ route('dashboard.home') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Dashboard Admin
+                                </a>
+                            @elseif(auth()->user()->role !== 'admin')
+                                <a href="{{ route('transaction.cart') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    Riwayat Pemesanan
+                                </a>
+                            @endif
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
