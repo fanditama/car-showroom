@@ -35,7 +35,13 @@ Route::get('/cars/{car}', function (Car $car) {
     return view('car.car-detail-page', ['car' => $car]);
 })->name('cars.show');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard/home', function () {
+        return view('dashboard.home-page');
+    })->name('dashboard.home');
+});
+
+Route::middleware(['auth', 'user'])->prefix('user')->group(function () {
     Route::get('/cart', function() {
        return view('order.cart-index-page');
     })->name('cart.index');
