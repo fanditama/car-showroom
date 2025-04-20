@@ -58,6 +58,7 @@
                     </div>
 
                     <!-- Action Buttons -->
+                    @if(auth()->check() && auth()->user()->role === 'user')
                     <div class="space-y-3">
                         <button wire:click="order" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center">
                             <i class="fas fa-shop text-xl mr-2"></i>
@@ -76,6 +77,19 @@
                             </button>
                         @endif
                     </div>
+                    @elseif(!auth()->check())
+                    <div class="space-y-3">
+                        <button wire:click="order" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-shop text-xl mr-2"></i>
+                            <span class="text-base">Pesan Sekarang</span>
+                        </button>
+
+                        <button wire:click="addToCart" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-cart-shopping text-xl mr-2"></i>
+                            <span class="text-base">Simpan ke Keranjang</span>
+                        </button>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
