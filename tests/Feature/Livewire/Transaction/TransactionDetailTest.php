@@ -7,7 +7,7 @@ use App\Models\User;
 use Livewire\Livewire;
 
 test('halaman detail transaksi dapat diakses oleh pemilik transaksi', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create(['role' => 'user']);
     $car = Car::factory()->create();
     $transaction = Transaction::factory()->create([
         'user_id' => $user->id,
@@ -22,11 +22,11 @@ test('halaman detail transaksi dapat diakses oleh pemilik transaksi', function (
 });
 
 test('halaman detail transaksi tidak dapat diakses oleh user lain', function () {
-    $owner = User::factory()->create();
-    $otherUser = User::factory()->create();
+    $user = User::factory()->create(['role' => 'user']);
+    $otherUser = User::factory()->create(['role' => 'user']);
     $car = Car::factory()->create();
     $transaction = Transaction::factory()->create([
-        'user_id' => $owner->id,
+        'user_id' => $user->id,
         'car_id' => $car->id,
     ]);
 
@@ -43,7 +43,7 @@ test('halaman detail transaksi menampilkan informasi transaksi dengan benar', fu
         'year' => 2022,
         'price' => 250000000,
     ]);
-    
+
     $transaction = Transaction::factory()->create([
         'user_id' => $user->id,
         'car_id' => $car->id,
@@ -67,7 +67,7 @@ test('halaman detail transaksi menampilkan informasi transaksi dengan benar', fu
 test('tombol bayar sekarang ditampilkan untuk transaksi pending dengan metode pembayaran online', function () {
     $user = User::factory()->create();
     $car = Car::factory()->create();
-    
+
     $transaction = Transaction::factory()->create([
         'user_id' => $user->id,
         'car_id' => $car->id,
@@ -83,7 +83,7 @@ test('tombol bayar sekarang ditampilkan untuk transaksi pending dengan metode pe
 test('tombol konfirmasi pesanan ditampilkan untuk transaksi pending dengan metode pembayaran tunai', function () {
     $user = User::factory()->create();
     $car = Car::factory()->create();
-    
+
     $transaction = Transaction::factory()->create([
         'user_id' => $user->id,
         'car_id' => $car->id,
@@ -99,7 +99,7 @@ test('tombol konfirmasi pesanan ditampilkan untuk transaksi pending dengan metod
 test('tombol batalkan pesanan ditampilkan untuk transaksi dengan status pending', function () {
     $user = User::factory()->create();
     $car = Car::factory()->create();
-    
+
     $transaction = Transaction::factory()->create([
         'user_id' => $user->id,
         'car_id' => $car->id,
@@ -114,9 +114,9 @@ test('tombol batalkan pesanan ditampilkan untuk transaksi dengan status pending'
 test('tombol batalkan pesanan tidak ditampilkan untuk transaksi dengan status selain pending', function () {
     $user = User::factory()->create();
     $car = Car::factory()->create();
-    
+
     $statuses = ['processing', 'success', 'failed', 'cancel'];
-    
+
     foreach ($statuses as $status) {
         $transaction = Transaction::factory()->create([
             'user_id' => $user->id,
@@ -133,7 +133,7 @@ test('tombol batalkan pesanan tidak ditampilkan untuk transaksi dengan status se
 test('dapat membatalkan transaksi dengan status pending', function () {
     $user = User::factory()->create();
     $car = Car::factory()->create();
-    
+
     $transaction = Transaction::factory()->create([
         'user_id' => $user->id,
         'car_id' => $car->id,
@@ -155,7 +155,7 @@ test('dapat membatalkan transaksi dengan status pending', function () {
 test('tidak dapat membatalkan transaksi dengan status selain pending', function () {
     $user = User::factory()->create();
     $car = Car::factory()->create();
-    
+
     $transaction = Transaction::factory()->create([
         'user_id' => $user->id,
         'car_id' => $car->id,
@@ -176,7 +176,7 @@ test('tidak dapat membatalkan transaksi dengan status selain pending', function 
 test('dapat memproses pembayaran tunai', function () {
     $user = User::factory()->create();
     $car = Car::factory()->create();
-    
+
     $transaction = Transaction::factory()->create([
         'user_id' => $user->id,
         'car_id' => $car->id,
@@ -199,7 +199,7 @@ test('dapat memproses pembayaran tunai', function () {
 test('menampilkan peta jika koordinat tersedia', function () {
     $user = User::factory()->create();
     $car = Car::factory()->create();
-    
+
     $transaction = Transaction::factory()->create([
         'user_id' => $user->id,
         'car_id' => $car->id,
@@ -217,7 +217,7 @@ test('menampilkan peta jika koordinat tersedia', function () {
 test('tidak menampilkan peta jika koordinat tidak tersedia', function () {
     $user = User::factory()->create();
     $car = Car::factory()->create();
-    
+
     $transaction = Transaction::factory()->create([
         'user_id' => $user->id,
         'car_id' => $car->id,
@@ -234,7 +234,7 @@ test('tidak menampilkan peta jika koordinat tidak tersedia', function () {
 test('menangani callback pembayaran berhasil', function () {
     $user = User::factory()->create();
     $car = Car::factory()->create();
-    
+
     $transaction = Transaction::factory()->create([
         'user_id' => $user->id,
         'car_id' => $car->id,
@@ -264,7 +264,7 @@ test('menangani callback pembayaran berhasil', function () {
 test('menangani callback pembayaran gagal', function () {
     $user = User::factory()->create();
     $car = Car::factory()->create();
-    
+
     $transaction = Transaction::factory()->create([
         'user_id' => $user->id,
         'car_id' => $car->id,
