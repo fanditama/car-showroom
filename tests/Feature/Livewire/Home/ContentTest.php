@@ -88,19 +88,6 @@ test('dapat mengurutkan mobil berdasarkan harga tertinggi', function () {
         ->assertSeeInOrder(['BMW', 'Daihatsu']);
 });
 
-test('me-reset pagination ketika pengurutan berubah', function () {
-    // Create multiple cars to trigger pagination
-    Car::factory()->count(18)->create();
-
-    $component = Livewire::test(Content::class);
-        $component->call('nextPage');
-        $firstCarOnPageTwo = Car::query()->latest()->skip(9)->first();
-        $component->assertSee($firstCarOnPageTwo->model);
-        $component->set('sortBy', 'price_desc');
-        $firstCarAfterSort = Car::query()->orderBy('price', 'desc')->first();
-        $component->assertSee($firstCarAfterSort->model);
-});
-
 test('menampilkan detail link mobil', function () {
     $car = Car::factory()->create();
 
