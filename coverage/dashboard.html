@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\Users\afand\laragon\www\laravel\car-showroom\app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css?v=11.0.9" rel="stylesheet" type="text/css">
+  <link href="_css/nv.d3.min.css?v=11.0.9" rel="stylesheet" type="text/css">
+  <link href="_css/style.css?v=11.0.9" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">C:\Users\afand\laragon\www\laravel\car-showroom\app</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Http/Responses/RegisterResponse.php.html#9">App\Http\Responses\RegisterResponse</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionIndex.php.html#10">App\Livewire\Transaction\TransactionIndex</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Contact.php.html#9">App\Models\Contact</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/CreditApplication.php.html#8">App\Models\CreditApplication</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Promotion.php.html#10">App\Models\Promotion</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/TestDrive.php.html#10">App\Models\TestDrive</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Cart.php.html#8">App\Models\Cart</a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#9">App\Models\Transaction</a></td><td class="text-right">70%</td></tr>
+       <tr><td><a href="Models/User.php.html#10">App\Models\User</a></td><td class="text-right">77%</td></tr>
+       <tr><td><a href="Livewire/Order/CartIndex.php.html#9">App\Livewire\Order\CartIndex</a></td><td class="text-right">82%</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionCart.php.html#10">App\Livewire\Transaction\TransactionCart</a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Livewire/Transaction/TransactionIndex.php.html#10">App\Livewire\Transaction\TransactionIndex</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Models/Promotion.php.html#10">App\Models\Promotion</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Models/CreditApplication.php.html#8">App\Models\CreditApplication</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Models/TestDrive.php.html#10">App\Models\TestDrive</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#9">App\Models\Transaction</a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Livewire/Order/CartIndex.php.html#9">App\Livewire\Order\CartIndex</a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionCart.php.html#10">App\Livewire\Transaction\TransactionCart</a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Http/Responses/RegisterResponse.php.html#11"><abbr title="App\Http\Responses\RegisterResponse::toResponse">toResponse</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionIndex.php.html#25"><abbr title="App\Livewire\Transaction\TransactionIndex::updatingSearch">updatingSearch</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionIndex.php.html#30"><abbr title="App\Livewire\Transaction\TransactionIndex::updatingStatusFilter">updatingStatusFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionIndex.php.html#35"><abbr title="App\Livewire\Transaction\TransactionIndex::setStatusFilter">setStatusFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionIndex.php.html#40"><abbr title="App\Livewire\Transaction\TransactionIndex::toggleDateSort">toggleDateSort</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionIndex.php.html#45"><abbr title="App\Livewire\Transaction\TransactionIndex::render">render</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Cart.php.html#14"><abbr title="App\Models\Cart::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Contact.php.html#26"><abbr title="App\Models\Contact::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/CreditApplication.php.html#26"><abbr title="App\Models\CreditApplication::setApplicationDateAttribute">setApplicationDateAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/CreditApplication.php.html#36"><abbr title="App\Models\CreditApplication::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/CreditApplication.php.html#41"><abbr title="App\Models\CreditApplication::car">car</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Promotion.php.html#26"><abbr title="App\Models\Promotion::setStartDateAttribute">setStartDateAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Promotion.php.html#36"><abbr title="App\Models\Promotion::setEndDateAttribute">setEndDateAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Promotion.php.html#46"><abbr title="App\Models\Promotion::car">car</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/TestDrive.php.html#21"><abbr title="App\Models\TestDrive::setTestDriveDateAttribute">setTestDriveDateAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/TestDrive.php.html#31"><abbr title="App\Models\TestDrive::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/TestDrive.php.html#36"><abbr title="App\Models\TestDrive::car">car</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#60"><abbr title="App\Models\Transaction::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/User.php.html#56"><abbr title="App\Models\User::carts">carts</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/User.php.html#61"><abbr title="App\Models\User::transactions">transactions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionCart.php.html#16"><abbr title="App\Livewire\Transaction\TransactionCart::mount">mount</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#40"><abbr title="App\Models\Transaction::setTransactionDateAttribute">setTransactionDateAttribute</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#50"><abbr title="App\Models\Transaction::setPaymentDateAttribute">setPaymentDateAttribute</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Livewire/Order/OrderForm.php.html#43"><abbr title="App\Livewire\Order\OrderForm::mount">mount</abbr></a></td><td class="text-right">77%</td></tr>
+       <tr><td><a href="Livewire/Order/CartIndex.php.html#27"><abbr title="App\Livewire\Order\CartIndex::removeItem">removeItem</abbr></a></td><td class="text-right">79%</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionDetail.php.html#74"><abbr title="App\Livewire\Transaction\TransactionDetail::processPayment">processPayment</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Livewire/Car/CarDetail.php.html#66"><abbr title="App\Livewire\Car\CarDetail::addToCart">addToCart</abbr></a></td><td class="text-right">83%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Livewire/Transaction/TransactionIndex.php.html#35"><abbr title="App\Livewire\Transaction\TransactionIndex::setStatusFilter">setStatusFilter</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionIndex.php.html#40"><abbr title="App\Livewire\Transaction\TransactionIndex::toggleDateSort">toggleDateSort</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Models/CreditApplication.php.html#26"><abbr title="App\Models\CreditApplication::setApplicationDateAttribute">setApplicationDateAttribute</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Models/Promotion.php.html#26"><abbr title="App\Models\Promotion::setStartDateAttribute">setStartDateAttribute</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Models/Promotion.php.html#36"><abbr title="App\Models\Promotion::setEndDateAttribute">setEndDateAttribute</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Models/TestDrive.php.html#21"><abbr title="App\Models\TestDrive::setTestDriveDateAttribute">setTestDriveDateAttribute</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Livewire/Order/OrderForm.php.html#43"><abbr title="App\Livewire\Order\OrderForm::mount">mount</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Livewire/Order/CartIndex.php.html#27"><abbr title="App\Livewire\Order\CartIndex::removeItem">removeItem</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionDetail.php.html#74"><abbr title="App\Livewire\Transaction\TransactionDetail::processPayment">processPayment</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Livewire/Car/CarDetail.php.html#66"><abbr title="App\Livewire\Car\CarDetail::addToCart">addToCart</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Livewire/Transaction/TransactionCart.php.html#16"><abbr title="App\Livewire\Transaction\TransactionCart::mount">mount</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#40"><abbr title="App\Models\Transaction::setTransactionDateAttribute">setTransactionDateAttribute</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Models/Transaction.php.html#50"><abbr title="App\Models\Transaction::setPaymentDateAttribute">setPaymentDateAttribute</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 11.0.9</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.14</a> and <a href="https://phpunit.de/">PHPUnit 11.5.3</a> at Sat Apr 19 8:53:42 WIB 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/jquery.min.js?v=11.0.9" type="text/javascript"></script>
+  <script src="_js/d3.min.js?v=11.0.9" type="text/javascript"></script>
+  <script src="_js/nv.d3.min.js?v=11.0.9" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([6,0,0,0,0,0,1,0,2,2,3,7], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([20,0,0,0,0,0,1,0,4,2,1,42], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[100,4,"<a href=\"Http\/Controllers\/AccountController.php.html#10\">App\\Http\\Controllers\\AccountController<\/a>"],[100,6,"<a href=\"Http\/Controllers\/AuthController.php.html#11\">App\\Http\\Controllers\\AuthController<\/a>"],[100,0,"<a href=\"Http\/Controllers\/Controller.php.html#5\">App\\Http\\Controllers\\Controller<\/a>"],[100,5,"<a href=\"Http\/Controllers\/SocialiteController.php.html#11\">App\\Http\\Controllers\\SocialiteController<\/a>"],[0,1,"<a href=\"Http\/Responses\/RegisterResponse.php.html#9\">App\\Http\\Responses\\RegisterResponse<\/a>"],[95,14,"<a href=\"Livewire\/Car\/CarDetail.php.html#11\">App\\Livewire\\Car\\CarDetail<\/a>"],[100,8,"<a href=\"Livewire\/Home\/Content.php.html#9\">App\\Livewire\\Home\\Content<\/a>"],[100,6,"<a href=\"Livewire\/Home\/Header.php.html#10\">App\\Livewire\\Home\\Header<\/a>"],[82.75862068965517,6,"<a href=\"Livewire\/Order\/CartIndex.php.html#9\">App\\Livewire\\Order\\CartIndex<\/a>"],[94.73684210526315,11,"<a href=\"Livewire\/Order\/OrderForm.php.html#10\">App\\Livewire\\Order\\OrderForm<\/a>"],[88.88888888888889,3,"<a href=\"Livewire\/Transaction\/TransactionCart.php.html#10\">App\\Livewire\\Transaction\\TransactionCart<\/a>"],[96.15384615384616,16,"<a href=\"Livewire\/Transaction\/TransactionDetail.php.html#11\">App\\Livewire\\Transaction\\TransactionDetail<\/a>"],[0,7,"<a href=\"Livewire\/Transaction\/TransactionIndex.php.html#10\">App\\Livewire\\Transaction\\TransactionIndex<\/a>"],[100,0,"<a href=\"Models\/Car.php.html#8\">App\\Models\\Car<\/a>"],[50,2,"<a href=\"Models\/Cart.php.html#8\">App\\Models\\Cart<\/a>"],[0,1,"<a href=\"Models\/Contact.php.html#9\">App\\Models\\Contact<\/a>"],[0,4,"<a href=\"Models\/CreditApplication.php.html#8\">App\\Models\\CreditApplication<\/a>"],[0,5,"<a href=\"Models\/Promotion.php.html#10\">App\\Models\\Promotion<\/a>"],[0,4,"<a href=\"Models\/TestDrive.php.html#10\">App\\Models\\TestDrive<\/a>"],[70,6,"<a href=\"Models\/Transaction.php.html#9\">App\\Models\\Transaction<\/a>"],[77.77777777777779,3,"<a href=\"Models\/User.php.html#10\">App\\Models\\User<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"Http\/Controllers\/AccountController.php.html#21\">App\\Http\\Controllers\\AccountController::settings<\/a>"],[100,1,"<a href=\"Http\/Controllers\/AccountController.php.html#29\">App\\Http\\Controllers\\AccountController::updateProfile<\/a>"],[100,2,"<a href=\"Http\/Controllers\/AccountController.php.html#50\">App\\Http\\Controllers\\AccountController::updatePassword<\/a>"],[100,1,"<a href=\"Http\/Controllers\/AuthController.php.html#16\">App\\Http\\Controllers\\AuthController::showLoginForm<\/a>"],[100,2,"<a href=\"Http\/Controllers\/AuthController.php.html#24\">App\\Http\\Controllers\\AuthController::login<\/a>"],[100,1,"<a href=\"Http\/Controllers\/AuthController.php.html#53\">App\\Http\\Controllers\\AuthController::logout<\/a>"],[100,1,"<a href=\"Http\/Controllers\/AuthController.php.html#69\">App\\Http\\Controllers\\AuthController::showRegistrationForm<\/a>"],[100,1,"<a href=\"Http\/Controllers\/AuthController.php.html#77\">App\\Http\\Controllers\\AuthController::register<\/a>"],[100,2,"<a href=\"Http\/Controllers\/SocialiteController.php.html#14\">App\\Http\\Controllers\\SocialiteController::redirect<\/a>"],[100,2,"<a href=\"Http\/Controllers\/SocialiteController.php.html#25\">App\\Http\\Controllers\\SocialiteController::callback<\/a>"],[100,1,"<a href=\"Http\/Controllers\/SocialiteController.php.html#50\">App\\Http\\Controllers\\SocialiteController::validateProvider<\/a>"],[0,1,"<a href=\"Http\/Responses\/RegisterResponse.php.html#11\">App\\Http\\Responses\\RegisterResponse::toResponse<\/a>"],[100,2,"<a href=\"Livewire\/Car\/CarDetail.php.html#18\">App\\Livewire\\Car\\CarDetail::mount<\/a>"],[100,1,"<a href=\"Livewire\/Car\/CarDetail.php.html#28\">App\\Livewire\\Car\\CarDetail::toggleSharePopup<\/a>"],[100,1,"<a href=\"Livewire\/Car\/CarDetail.php.html#34\">App\\Livewire\\Car\\CarDetail::shareToWhatsApp<\/a>"],[100,1,"<a href=\"Livewire\/Car\/CarDetail.php.html#43\">App\\Livewire\\Car\\CarDetail::shareToFacebook<\/a>"],[100,1,"<a href=\"Livewire\/Car\/CarDetail.php.html#51\">App\\Livewire\\Car\\CarDetail::shareToInstagram<\/a>"],[100,2,"<a href=\"Livewire\/Car\/CarDetail.php.html#57\">App\\Livewire\\Car\\CarDetail::order<\/a>"],[83.33333333333334,3,"<a href=\"Livewire\/Car\/CarDetail.php.html#66\">App\\Livewire\\Car\\CarDetail::addToCart<\/a>"],[100,2,"<a href=\"Livewire\/Car\/CarDetail.php.html#88\">App\\Livewire\\Car\\CarDetail::removeFromCart<\/a>"],[100,1,"<a href=\"Livewire\/Car\/CarDetail.php.html#105\">App\\Livewire\\Car\\CarDetail::render<\/a>"],[100,1,"<a href=\"Livewire\/Home\/Content.php.html#18\">App\\Livewire\\Home\\Content::updatedSortBy<\/a>"],[100,1,"<a href=\"Livewire\/Home\/Content.php.html#23\">App\\Livewire\\Home\\Content::mount<\/a>"],[100,6,"<a href=\"Livewire\/Home\/Content.php.html#28\">App\\Livewire\\Home\\Content::render<\/a>"],[100,1,"<a href=\"Livewire\/Home\/Header.php.html#18\">App\\Livewire\\Home\\Header::mount<\/a>"],[100,3,"<a href=\"Livewire\/Home\/Header.php.html#25\">App\\Livewire\\Home\\Header::updateCartCount<\/a>"],[100,1,"<a href=\"Livewire\/Home\/Header.php.html#38\">App\\Livewire\\Home\\Header::logout<\/a>"],[100,1,"<a href=\"Livewire\/Home\/Header.php.html#46\">App\\Livewire\\Home\\Header::render<\/a>"],[100,1,"<a href=\"Livewire\/Order\/CartIndex.php.html#15\">App\\Livewire\\Order\\CartIndex::mount<\/a>"],[100,1,"<a href=\"Livewire\/Order\/CartIndex.php.html#20\">App\\Livewire\\Order\\CartIndex::refreshCart<\/a>"],[79.16666666666666,3,"<a href=\"Livewire\/Order\/CartIndex.php.html#27\">App\\Livewire\\Order\\CartIndex::removeItem<\/a>"],[100,1,"<a href=\"Livewire\/Order\/CartIndex.php.html#66\">App\\Livewire\\Order\\CartIndex::render<\/a>"],[77.77777777777779,3,"<a href=\"Livewire\/Order\/OrderForm.php.html#43\">App\\Livewire\\Order\\OrderForm::mount<\/a>"],[100,1,"<a href=\"Livewire\/Order\/OrderForm.php.html#61\">App\\Livewire\\Order\\OrderForm::updatedPaymentMethod<\/a>"],[100,3,"<a href=\"Livewire\/Order\/OrderForm.php.html#67\">App\\Livewire\\Order\\OrderForm::updateLocation<\/a>"],[100,2,"<a href=\"Livewire\/Order\/OrderForm.php.html#84\">App\\Livewire\\Order\\OrderForm::updateAddress<\/a>"],[100,1,"<a href=\"Livewire\/Order\/OrderForm.php.html#92\">App\\Livewire\\Order\\OrderForm::submitOrder<\/a>"],[100,1,"<a href=\"Livewire\/Order\/OrderForm.php.html#114\">App\\Livewire\\Order\\OrderForm::render<\/a>"],[50,2,"<a href=\"Livewire\/Transaction\/TransactionCart.php.html#16\">App\\Livewire\\Transaction\\TransactionCart::mount<\/a>"],[100,1,"<a href=\"Livewire\/Transaction\/TransactionCart.php.html#23\">App\\Livewire\\Transaction\\TransactionCart::render<\/a>"],[100,5,"<a href=\"Livewire\/Transaction\/TransactionDetail.php.html#17\">App\\Livewire\\Transaction\\TransactionDetail::mount<\/a>"],[96.66666666666667,2,"<a href=\"Livewire\/Transaction\/TransactionDetail.php.html#32\">App\\Livewire\\Transaction\\TransactionDetail::generateSnapToken<\/a>"],[80,3,"<a href=\"Livewire\/Transaction\/TransactionDetail.php.html#74\">App\\Livewire\\Transaction\\TransactionDetail::processPayment<\/a>"],[100,3,"<a href=\"Livewire\/Transaction\/TransactionDetail.php.html#96\">App\\Livewire\\Transaction\\TransactionDetail::handlePaymentCallback<\/a>"],[100,2,"<a href=\"Livewire\/Transaction\/TransactionDetail.php.html#125\">App\\Livewire\\Transaction\\TransactionDetail::cancelTransaction<\/a>"],[100,1,"<a href=\"Livewire\/Transaction\/TransactionDetail.php.html#146\">App\\Livewire\\Transaction\\TransactionDetail::render<\/a>"],[0,1,"<a href=\"Livewire\/Transaction\/TransactionIndex.php.html#25\">App\\Livewire\\Transaction\\TransactionIndex::updatingSearch<\/a>"],[0,1,"<a href=\"Livewire\/Transaction\/TransactionIndex.php.html#30\">App\\Livewire\\Transaction\\TransactionIndex::updatingStatusFilter<\/a>"],[0,2,"<a href=\"Livewire\/Transaction\/TransactionIndex.php.html#35\">App\\Livewire\\Transaction\\TransactionIndex::setStatusFilter<\/a>"],[0,2,"<a href=\"Livewire\/Transaction\/TransactionIndex.php.html#40\">App\\Livewire\\Transaction\\TransactionIndex::toggleDateSort<\/a>"],[0,1,"<a href=\"Livewire\/Transaction\/TransactionIndex.php.html#45\">App\\Livewire\\Transaction\\TransactionIndex::render<\/a>"],[0,1,"<a href=\"Models\/Cart.php.html#14\">App\\Models\\Cart::user<\/a>"],[100,1,"<a href=\"Models\/Cart.php.html#19\">App\\Models\\Cart::car<\/a>"],[0,1,"<a href=\"Models\/Contact.php.html#26\">App\\Models\\Contact::user<\/a>"],[0,2,"<a href=\"Models\/CreditApplication.php.html#26\">App\\Models\\CreditApplication::setApplicationDateAttribute<\/a>"],[0,1,"<a href=\"Models\/CreditApplication.php.html#36\">App\\Models\\CreditApplication::user<\/a>"],[0,1,"<a href=\"Models\/CreditApplication.php.html#41\">App\\Models\\CreditApplication::car<\/a>"],[0,2,"<a href=\"Models\/Promotion.php.html#26\">App\\Models\\Promotion::setStartDateAttribute<\/a>"],[0,2,"<a href=\"Models\/Promotion.php.html#36\">App\\Models\\Promotion::setEndDateAttribute<\/a>"],[0,1,"<a href=\"Models\/Promotion.php.html#46\">App\\Models\\Promotion::car<\/a>"],[0,2,"<a href=\"Models\/TestDrive.php.html#21\">App\\Models\\TestDrive::setTestDriveDateAttribute<\/a>"],[0,1,"<a href=\"Models\/TestDrive.php.html#31\">App\\Models\\TestDrive::user<\/a>"],[0,1,"<a href=\"Models\/TestDrive.php.html#36\">App\\Models\\TestDrive::car<\/a>"],[75,2,"<a href=\"Models\/Transaction.php.html#40\">App\\Models\\Transaction::setTransactionDateAttribute<\/a>"],[75,2,"<a href=\"Models\/Transaction.php.html#50\">App\\Models\\Transaction::setPaymentDateAttribute<\/a>"],[0,1,"<a href=\"Models\/Transaction.php.html#60\">App\\Models\\Transaction::user<\/a>"],[100,1,"<a href=\"Models\/Transaction.php.html#65\">App\\Models\\Transaction::car<\/a>"],[100,1,"<a href=\"Models\/User.php.html#45\">App\\Models\\User::casts<\/a>"],[0,1,"<a href=\"Models\/User.php.html#56\">App\\Models\\User::carts<\/a>"],[0,1,"<a href=\"Models\/User.php.html#61\">App\\Models\\User::transactions<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

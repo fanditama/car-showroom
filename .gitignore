@@ -21,4 +21,6 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
-/coverage
+/coverage.vapor/
+.env.production
+.env.staging
