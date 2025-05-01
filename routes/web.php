@@ -39,6 +39,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard/home', function () {
         return view('dashboard.home-page');
     })->name('dashboard.home');
+    Route::get('/dashboard/user', function () {
+        return view('dashboard.user-management-page');
+    })->name('dashboard.user');
 });
 
 Route::middleware(['auth', 'user'])->prefix('user')->group(function () {
