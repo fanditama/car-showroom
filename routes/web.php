@@ -42,6 +42,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard/user', function () {
         return view('dashboard.user-management-page');
     })->name('dashboard.user');
+    Route::get('/dashboard/car', function () {
+        return view('dashboard.car-inventory-page');
+    })->name('dashboard.car');
 });
 
 Route::middleware(['auth', 'user'])->prefix('user')->group(function () {
