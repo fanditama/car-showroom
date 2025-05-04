@@ -145,6 +145,9 @@ it('menampilkan icon keranjang belanja', function () {
 });
 
 it('menampilkan angka nol pada keranjang belanja', function () {
+    $user = User::factory()->create(['role' => 'user']);
+    actingAs($user);
+
     Livewire::test(Header::class)
         ->assertSeeHtml('<span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>');
 });
@@ -213,6 +216,9 @@ it('menampilkan perhitungan cart di halaman view mobile dan dekstop', function (
 });
 
 it('link ke halaman cart dengan benar', function () {
+    $user = User::factory()->create(['role' => 'user']);
+    actingAs($user);
+    
     Livewire::test(Header::class)
         ->assertSeeHtml('href="' . route('cart.index') . '"');
 });
