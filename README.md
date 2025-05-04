@@ -130,3 +130,30 @@ Proyek ini mengikuti struktur standar Laravel dengan organisasi tambahan untuk k
 - app/Models/ - Berisi model seperti Car, Cart, dan User
 - app/Services/ - Berisi layanan integrasi seperti MidtransService
 - tests/Feature/Livewire/ - Berisi pengujian untuk komponen Livewire
+
+### Deployment dengan Laravel Vapor
+Jika ingin mendeploy aplikasi ini ke cloud severless via AWS Lambda, dan penyimpanan cloud via AWS RDS. Berikut beberapa langkah yang perlu dilakukan:
+1. Login atau buat akun Laravel Vapor (https://vapor.laravel.com)
+2. Siapkan akun AWS dan buat IAM user dengan akses ke RDS dan S3, untuk proses pembuatan akun dan setup IAM user bisa mengikuti dokumentasi di https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html atau dokumentasi laravel vapor di https://docs.vapor.build/projects/the-basics untuk proses pembuatan projek dan deployment
+3. Install laravel vapor CLI di local machine
+   ```bash
+   composer global require laravel/vapor-cli
+   ```
+4. Login ke akun vapor
+   ```bash
+    vapor login
+    ```
+5. Install package laravel vapor
+   ```bash
+   composer require laravel/vapor-bridge
+   ```
+6. Buat file vapor.yml di root project
+   ```bash
+    vapor init
+    ```
+7. Konfigurasi file vapor.yml sesuai kebutuhan
+   lihat file deploy.yml di root project
+8. Deploy aplikasi ke vapor
+   ```bash
+    vapor deploy nama_environment
+    ```

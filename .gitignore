@@ -25,4 +25,3 @@ yarn-error.log
 .env.production
 .env.staging
 .vapor/
-vapor.yml
