@@ -116,7 +116,7 @@ it('menampilkan tautan riwayat pemesanan untuk pengguna reguler tetapi tidak unt
 });
 
 it('menampilan inisial user\'s ketika terautentikasi', function () {
-    $user = User::factory()->create(['name' => 'John Doe']);
+    $user = User::factory()->create(['name' => 'John Doe', 'role' => 'user']);
     actingAs($user);
 
     Livewire::test(Header::class)
@@ -140,6 +140,9 @@ it('link logout redirect ke route yang benar', function () {
 });
 
 it('menampilkan icon keranjang belanja', function () {
+    $user = User::factory()->create(['role' => 'user']);
+    actingAs($user);
+
     Livewire::test(Header::class)
         ->assertSee('M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z');
 });
@@ -206,7 +209,7 @@ it('dapat me-load dengan benar perhitungan cart dari database di function mount'
 });
 
 it('menampilkan perhitungan cart di halaman view mobile dan dekstop', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create(['role' => 'user']);
     actingAs($user);
 
     Livewire::test(Header::class)
