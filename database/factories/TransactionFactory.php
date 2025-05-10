@@ -19,10 +19,10 @@ class TransactionFactory extends Factory
         $orderPrefix = 'ORDER-' . now()->format('Ym');
         $orderNumber = $this->faker->unique()->numberBetween(10000, 99999);
         $orderId = $orderPrefix . $orderNumber;
-        
+
         return [
             'order_id' => $orderId,
-            'transaction_date' => now()->format('d-m-Y H:i:s'),
+            'transaction_date' => $this->faker->dateTimeBetween('-10 year', 'now')->format('d-m-Y H:i:s'),
             'total_amount' => $this->faker->randomFloat(2, 10000, 100000),
             'payment_method' => $this->faker->randomElement(['transfer_bank', 'credit_card', 'cash']),
             'status' => $this->faker->randomElement(['pending', 'processing', 'success', 'cancel', 'failed']),
@@ -35,7 +35,7 @@ class TransactionFactory extends Factory
             'snap_token' => $this->faker->uuid,
         ];
     }
-    
+
     /**
      * Set the transaction to pending status
      */
@@ -47,7 +47,7 @@ class TransactionFactory extends Factory
             ];
         });
     }
-    
+
     /**
      * Set the transaction to processing status
      */
@@ -59,7 +59,7 @@ class TransactionFactory extends Factory
             ];
         });
     }
-    
+
     /**
      * Set the transaction to success status
      */
@@ -72,7 +72,7 @@ class TransactionFactory extends Factory
             ];
         });
     }
-    
+
     /**
      * Set the transaction to cancel status
      */
@@ -84,7 +84,7 @@ class TransactionFactory extends Factory
             ];
         });
     }
-    
+
     /**
      * Set the transaction to failed status
      */
