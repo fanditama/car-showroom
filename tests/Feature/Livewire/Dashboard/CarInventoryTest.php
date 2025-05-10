@@ -33,6 +33,74 @@ test('halaman inventory mobil menampilkan data mobil dari database', function ()
         ->assertSee($cars->first()->model);
 });
 
+test('halaman inventory mobil menampilkan harga dalam format rupiah dengan pemisah titik', function () {
+    $car = Car::factory()->create([
+        'brand' => 'Toyota',
+        'price' => 1000000
+    ]);
+
+    // Test apakah tampilan tabel menampilkan format rupiah yang benar
+    Livewire::actingAs($this->admin)
+        ->test(CarInventory::class)
+        ->assertSee('Rp 1.000.000');
+});
+
+test('form edit menampilkan harga dalam format rupiah dengan pemisah titik', function () {
+    $car = Car::factory()->create([
+        'brand' => 'Toyota',
+        'price' => 1000000
+    ]);
+
+    // Test bahwa saat mode edit, harga ditampilkan dengan format yang benar
+    $component = Livewire::actingAs($this->admin)
+        ->test(CarInventory::class)
+        ->call('edit', $car->id);
+
+    // Periksa apakah harga yang di-set ke form menggunakan format rupiah dengan pemisah titik
+    expect($component->get('price'))->toBe('1.000.000');
+});
+
+test('dapat menyimpan harga yang dimasukkan dalam format rupiah dengan pemisah titik', function () {
+    $car = Car::factory()->create([
+        'brand' => 'Toyota',
+        'price' => 1000000
+    ]);
+
+    // Test update dengan format harga rupiah
+    Livewire::actingAs($this->admin)
+        ->test(CarInventory::class)
+        ->call('edit', $car->id)
+        ->set('price', '1.500.000') // Format dengan pemisah titik
+        ->call('store');
+
+    // Verifikasi bahwa nilai yang disimpan di database adalah nilai numerik tanpa pemisah
+    $this->assertDatabaseHas('cars', [
+        'id' => $car->id,
+        'price' => 1500000
+    ]);
+});
+
+
+test('pembuatan mobil baru dapat menerima harga dalam format rupiah dengan pemisah titik', function () {
+    Storage::fake('public');
+
+    Livewire::actingAs($this->admin)
+        ->test(CarInventory::class)
+        ->set('brand', 'Tesla')
+        ->set('model', 'Model S')
+        ->set('year', 2023)
+        ->set('price', '75.000.000') // Format dengan pemisah titik
+        ->set('type', 'sedan')
+        ->call('store');
+
+    // Verifikasi nilai yang disimpan adalah nilai numerik
+    $this->assertDatabaseHas('cars', [
+        'brand' => 'Tesla',
+        'model' => 'Model S',
+        'price' => 75000000
+    ]);
+});
+
 test('halaman inventory mobil dapat mencari data mobil', function () {
     Car::factory()->create(['brand' => 'Toyota']);
     Car::factory()->create(['brand' => 'Honda']);

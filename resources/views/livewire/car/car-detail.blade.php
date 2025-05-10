@@ -7,7 +7,7 @@
                 <div class="md:col-span-2">
                     <div class="relative rounded-lg overflow-hidden">
                         @if($car->image_url)
-                            <img src="{{ $car->image_url }}"
+                            <img src="{{ asset('storage/' . $car->image_url) }}"
                                  alt="{{ $car->brand }} {{ $car->model }}"
                                  class="w-full h-[400px] object-cover rounded-lg">
                         @else

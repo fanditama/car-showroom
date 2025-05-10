@@ -82,12 +82,19 @@ class CarInventory extends Component
         $this->brand = $car->brand;
         $this->model = $car->model;
         $this->year = $car->year;
-        $this->price = $car->price;
+        $this->price = number_format($car->price, 0, ',', '.');
         $this->type = $car->type;
         $this->description = $car->description;
 
         $this->showAddModal = true;
         $this->editMode = true;
+    }
+
+    // format saat ubah harga
+    public function updatedPrice($value)
+    {
+        // Hapus titik sebagai pemisah ribuan sebelum disimpan ke model
+        // $this->price = str_replace('.', '', $value);
     }
 
     public function delete($carId)
@@ -112,12 +119,10 @@ class CarInventory extends Component
 
     public function store()
     {
-        $this->validate();
+        // memastikan harga sudah dalam format numerik tanpa pemisah ribuan
+        $this->price = str_replace('.', '', $this->price);
 
-        $imageUrl = null;
-        if ($this->image) {
-            $imageUrl = $this->image->store('car-images', 'public');
-        }
+        $this->validate();
 
         if ($this->editMode) {
             $car = Car::findOrFail($this->currentCarId);

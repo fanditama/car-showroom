@@ -136,7 +136,16 @@
                                 </div>
                                 <div>
                                     <label for="price" class="block text-sm font-medium text-gray-700">Harga</label>
-                                    <input type="number" id="price" wire:model="price" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    <input type="text" id="price"
+                                               class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                               value="{{ $price }}"
+                                               wire:ignore
+                                               x-data
+                                               x-on:input="
+                                                   $el.value = $el.value.replace(/[^0-9]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                                                   $dispatch('input', $el.value);
+                                               "
+                                               x-on:change="$wire.set('price', $el.value)">
                                     @error('price') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                                 </div>
                                 <div>
