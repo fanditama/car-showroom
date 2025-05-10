@@ -20,4 +20,9 @@ class Car extends Model
         'description' => 'string',
         'image_url' => 'string',
     ];
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
